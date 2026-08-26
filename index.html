@@ -444,7 +444,7 @@
       <a class="chan" href="#dash" style="--c:var(--ch3)">
         <span class="chan-id">CH3</span>
         <span class="chan-name">Driver Display <em style="font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)">&mdash; in progress</em></span>
-        <span class="chan-meta">STM32H745 &middot; TouchGFX &middot; CAN</span>
+        <span class="chan-meta">STM32H745 &middot; TFT &middot; CAN</span>
         <span class="chan-year">2026</span>
       </a>
 
@@ -645,7 +645,7 @@
       <span class="label" style="color:var(--c);font-weight:600">In progress</span>
     </div>
     <p class="oneline">
-      A touchscreen driver display on an STM32H745I-DISCO, showing MoTeC ECU channels
+      A TFT driver display running on an STM32H745I-DISCO, showing MoTeC ECU channels
       over CAN, with the display logic generated from Simulink. Currently debugging the
       integration between the generated code and the graphics stack.
     </p>
@@ -661,6 +661,7 @@
 
     <dl class="specs">
       <div class="spec"><dt>Board</dt><dd>STM32H745I-DISCO</dd></div>
+      <div class="spec"><dt>Display</dt><dd>TFT LCD</dd></div>
       <div class="spec"><dt>Graphics</dt><dd>TouchGFX</dd></div>
       <div class="spec"><dt>Logic</dt><dd>Simulink /<br>Embedded Coder</dd></div>
       <div class="spec"><dt>Data source</dt><dd>MoTeC ECU over CAN</dd></div>
@@ -671,7 +672,7 @@
       <div class="block">
         <h4>The goal</h4>
         <p>
-          Put live engine and vehicle channels in front of the driver on a touchscreen,
+          Put live engine and vehicle channels in front of the driver on a TFT panel,
           with the display logic authored as a Simulink model and generated to C rather
           than hand-written &mdash; so the team can change what&rsquo;s shown without
           rewriting firmware.
@@ -690,7 +691,7 @@
       <div class="block wide fail">
         <h4>What I&rsquo;m working through</h4>
         <p>
-          Because TouchGFX renders correctly on its own, the display panel, framebuffer,
+          Because TouchGFX renders correctly on its own, the TFT panel, framebuffer,
           and LTDC configuration are all known good. That isolates the fault to the
           integration itself, which narrows it to a few candidates worth checking in order:
         </p>
@@ -811,7 +812,7 @@
         <p class="label" style="margin:0 0 18px">Tools &amp; skills</p>
 
         <p><strong>Firmware</strong>
-          Bare-metal C on ARM Cortex-M, FreeRTOS, CAN, I&sup2;C, SPI, ADC, timers, PWM, interrupt handling</p>
+          Bare-metal C on ARM Cortex-M, CAN, I&sup2;C, SPI, ADC, timers, PWM, interrupt handling</p>
 
         <p><strong>Hardware</strong>
           Connector pinning, de-pinning, and repair; crimp termination and strain relief; soldering; sensor wiring and integration</p>
@@ -823,7 +824,7 @@
           VHDL, self-checking testbenches, AXI</p>
 
         <p><strong>Software &amp; tools</strong>
-          MATLAB, Simulink and Embedded Coder, PSpice, Git</p>
+          MATLAB, Simulink and Embedded Coder, STM32CubeIDE, TouchGFX, PSpice, Git</p>
       </div>
     </div>
   </div>
