@@ -3,22 +3,14 @@
   ============================================================
   ETHAN RANAEI — PORTFOLIO
   ============================================================
-  This is the whole site. One file. No build step.
-
-  TO PUBLISH (about 5 minutes):
-    1. Make a GitHub repo named  <your-username>.github.io
-    2. Upload this file, named exactly  index.html
-    3. Repo Settings -> Pages -> Source: "Deploy from a branch", branch: main, folder: / (root)
-    4. Wait ~60s. Your site is live at https://<your-username>.github.io
-
   TO ADD PHOTOS:
     - Make a folder called  img/  in the repo, upload your photos there
-    - Find the blocks marked  <!-- SWAP: -->  below
-    - Replace the placeholder <div> with:  <img src="img/yourfile.jpg" alt="what it shows">
+    - Find the blocks marked  SWAP:  below
+    - Replace the placeholder <div class="ph">...</div> with:
+      <img src="img/yourfile.jpg" alt="what it shows">
 
   TO MAKE THE PDF VERSION:
     - Open the live site, press Cmd/Ctrl+P, "Save as PDF"
-    - Print styles are already set up so it comes out clean
 
   SEARCH FOR  [FILL]  TO FIND EVERY SPOT THAT NEEDS YOUR REAL NUMBERS.
   ============================================================
@@ -28,7 +20,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Ethan Ranaei — Embedded &amp; Controls Engineering</title>
-<meta name="description" content="Computer Engineering student at CSUN. Embedded firmware, vehicle data acquisition, and control systems on Formula SAE.">
+<meta name="description" content="Computer Engineering student at CSUN. Embedded firmware, vehicle electronics, and sensor wiring on Formula SAE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;450;600&display=swap" rel="stylesheet">
@@ -41,7 +33,6 @@
     --rule:#CDD1D6;
     --rule-soft:#E2E5E8;
 
-    /* Scope channel colors — one per project */
     --ch1:#C8890B;
     --ch2:#12808E;
     --ch3:#B93A50;
@@ -81,7 +72,6 @@
     padding:0 28px;
   }
 
-  /* ---------- shared type ---------- */
   .label{
     font-family:var(--mono);
     font-size:11px;
@@ -99,7 +89,6 @@
     margin:0;
   }
 
-  /* ---------- masthead ---------- */
   header.top{
     border-bottom:1px solid var(--rule);
     background:var(--paper);
@@ -134,7 +123,6 @@
   .contactbar a{text-decoration:none;border-bottom:1px solid var(--rule)}
   .contactbar a:hover{border-bottom-color:var(--ink)}
 
-  /* ---------- channel index (the signature) ---------- */
   .index{
     margin:40px 0 0;
     border-top:1px solid var(--rule);
@@ -200,7 +188,6 @@
     .chan-year{order:-1}
   }
 
-  /* ---------- project sections ---------- */
   .proj{
     padding:78px 0 0;
     border-top:1px solid var(--rule);
@@ -237,7 +224,6 @@
     margin:14px 0 30px;
   }
 
-  /* media slot */
   .media{
     background:var(--card);
     border:1px solid var(--rule);
@@ -280,7 +266,6 @@
     border-top:1px solid var(--rule-soft);
   }
 
-  /* spec strip */
   .specs{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
@@ -313,7 +298,6 @@
     .spec:last-child{border-bottom:0}
   }
 
-  /* body blocks */
   .blocks{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -361,7 +345,6 @@
     padding-bottom:2px;
   }
 
-  /* ---------- coursework / about ---------- */
   .about{
     border-top:1px solid var(--rule);
     margin-top:78px;
@@ -401,13 +384,8 @@
     font-family:var(--mono);
     font-size:12px;
     color:var(--muted);
-    display:flex;
-    justify-content:space-between;
-    flex-wrap:wrap;
-    gap:12px;
   }
 
-  /* ---------- print / PDF ---------- */
   @media print{
     body{background:#fff;font-size:10.5pt}
     .wrap{max-width:none;padding:0}
@@ -427,9 +405,9 @@
     <p class="label">Computer Engineering &middot; California State University, Northridge</p>
     <h1 class="name">Ethan<br>Ranaei</h1>
     <p class="tagline">
-      I build the electronics that sense and control physical systems &mdash; firmware,
-      data acquisition, and wiring on a Formula SAE race car, plus the bench work
-      behind them.
+      Computer Engineering student working on embedded firmware and vehicle
+      electronics &mdash; bare-metal C, sensor wiring, and connector repair on a
+      Formula SAE car.
     </p>
 
     <div class="contactbar">
@@ -437,7 +415,7 @@
       <!-- [FILL] your real links below, or delete the lines you don't want -->
       <a href="#">LinkedIn</a>
       <a href="#">GitHub</a>
-      <a href="resume.pdf">Résumé (PDF)</a>
+      <a href="resume.pdf">R&eacute;sum&eacute; (PDF)</a>
       <span>Los Angeles, CA</span>
     </div>
 
@@ -449,33 +427,34 @@
         <span class="label">Year</span>
       </div>
 
-      <a class="chan" href="#dash" style="--c:var(--ch1)">
+      <a class="chan" href="#vault" style="--c:var(--ch1)">
         <span class="chan-id">CH1</span>
-        <span class="chan-name">Driver Display &amp; Telemetry Node</span>
-        <span class="chan-meta">ESP32 &middot; CAN &middot; FreeRTOS</span>
-        <span class="chan-year">2026</span>
-      </a>
-
-      <a class="chan" href="#harness" style="--c:var(--ch2)">
-        <span class="chan-id">CH2</span>
-        <span class="chan-name">MM37 Wiring Harness &amp; Data Acquisition</span>
-        <span class="chan-meta">MoTeC M130 &middot; Vehicle</span>
-        <span class="chan-year">2026</span>
-      </a>
-
-      <a class="chan" href="#vault" style="--c:var(--ch3)">
-        <span class="chan-id">CH3</span>
         <span class="chan-name">Access Control System</span>
         <span class="chan-meta">TM4C123 &middot; Bare-metal C</span>
         <span class="chan-year">2025</span>
       </a>
 
+      <a class="chan" href="#harness" style="--c:var(--ch2)">
+        <span class="chan-id">CH2</span>
+        <span class="chan-name">Harness Repair &amp; Sensor Wiring</span>
+        <span class="chan-meta">MoTeC M130 &middot; Formula SAE</span>
+        <span class="chan-year">2026</span>
+      </a>
+
+      <a class="chan" href="#dash" style="--c:var(--ch3)">
+        <span class="chan-id">CH3</span>
+        <span class="chan-name">Driver Display <em style="font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)">&mdash; in progress</em></span>
+        <span class="chan-meta">STM32H745 &middot; TouchGFX &middot; CAN</span>
+        <span class="chan-year">2026</span>
+      </a>
+
       <a class="chan" href="#spi" style="--c:var(--ch4)">
         <span class="chan-id">CH4</span>
         <span class="chan-name">AXI Quad SPI Controller</span>
-        <span class="chan-meta">VHDL &middot; Zybo Z7-10</span>
+        <span class="chan-meta">VHDL &middot; Simulation</span>
         <span class="chan-year">2025</span>
       </a>
+
     </nav>
   </div>
 </header>
@@ -483,169 +462,10 @@
 <main>
 
 <!-- ============ CH1 ============ -->
-<section class="proj" id="dash" style="--c:var(--ch1)">
+<section class="proj" id="vault" style="--c:var(--ch1)">
   <div class="wrap">
     <div class="proj-head">
       <span class="tag">CH1</span>
-      <h3>Driver Display &amp; Telemetry Node</h3>
-    </div>
-    <p class="oneline">
-      An ESP32 dashboard that pulls engine and vehicle state off the MoTeC ECU over CAN
-      and puts it in front of the driver &mdash; gear, shift lights, and logged position
-      and motion data &mdash; on Matador Motorsports&rsquo; Formula SAE car.
-    </p>
-
-    <!-- SWAP: replace this .ph div with <img src="img/dash.jpg" alt="Dashboard installed in the car"> -->
-    <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Photo &mdash; dashboard powered up in the car</span>
-        <span class="small">Shoot it lit, at dusk or in shade, from the driver&rsquo;s seat position. Shift lights mid-sweep is the shot.</span>
-      </div>
-      <figcaption class="cap">Driver display mounted on the steering column. [FILL caption]</figcaption>
-    </figure>
-
-    <dl class="specs">
-      <div class="spec"><dt>MCU</dt><dd>ESP32</dd></div>
-      <div class="spec"><dt>Bus</dt><dd>CAN &rarr; MoTeC M130</dd></div>
-      <div class="spec"><dt>Sensors</dt><dd>u-blox GPS<br>ICM-42670-P IMU</dd></div>
-      <div class="spec"><dt>Output</dt><dd>NeoPixel shift lights<br>7-segment gear</dd></div>
-      <div class="spec"><dt>RTOS</dt><dd>FreeRTOS</dd></div>
-    </dl>
-
-    <div class="blocks">
-      <div class="block">
-        <h4>What it had to do</h4>
-        <ul>
-          <li>Read engine channels off the M130 over CAN without adding load that disturbs the bus</li>
-          <li>Drive shift lights with low enough latency that the driver can trust them at redline</li>
-          <li>Log GPS position and IMU motion alongside ECU data for post-session review</li>
-          <li>Survive the vibration, heat, and voltage environment of a running car</li>
-        </ul>
-      </div>
-
-      <div class="block">
-        <h4>How it&rsquo;s built</h4>
-        <p>
-          Separate FreeRTOS tasks handle CAN receive, sensor polling, and display
-          rendering, so a slow I&sup2;C transaction can&rsquo;t stall the shift-light path.
-          The IMU and peripherals share an I&sup2;C bus guarded by a mutex.
-        </p>
-        <p>[FILL: CAN message rate, display refresh rate, task priorities.]</p>
-      </div>
-
-      <div class="block wide fail">
-        <h4>The bug worth talking about</h4>
-        <p>
-          The display would intermittently freeze under load. The cause was task
-          priority and I&sup2;C bus contention &mdash; concurrent access to the shared bus
-          with priorities that let a lower-importance task hold the mutex while the
-          render task waited on it. Fixing it meant reworking both the priority
-          assignment and the mutex scope rather than papering over it with delays.
-        </p>
-        <p>[FILL: how you found it &mdash; serial logging? scope on the bus? Say which. The method is the interesting part.]</p>
-      </div>
-
-      <div class="block">
-        <h4>Validation</h4>
-        <p>[FILL: what you measured to prove it works. Bus load percentage, dropped frame count, hours of run time without a freeze, logged data compared against MoTeC&rsquo;s own log.]</p>
-      </div>
-
-      <div class="block">
-        <h4>What I&rsquo;d change</h4>
-        <p>[FILL: one honest paragraph. This section is worth more than it looks &mdash; it shows you evaluate your own work.]</p>
-      </div>
-    </div>
-
-    <a class="repo" href="#">View source &rarr; [FILL repo link]</a>
-  </div>
-</section>
-
-<!-- ============ CH2 ============ -->
-<section class="proj" id="harness" style="--c:var(--ch2)">
-  <div class="wrap">
-    <div class="proj-head">
-      <span class="tag">CH2</span>
-      <h3>MM37 Wiring Harness &amp; Data Acquisition</h3>
-    </div>
-    <p class="oneline">
-      I own the wiring harness and data acquisition on the car: sensor integration into
-      the MoTeC M130, the failure analysis after our first season on the harness, and the
-      build plan that came out of it for the next car.
-    </p>
-
-    <!-- SWAP: replace with <img src="img/harness.jpg" alt="Wiring harness on the car"> -->
-    <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Photo &mdash; harness routed on the chassis</span>
-        <span class="small">A clean, well-lit shot of concentric twisting and service loops reads as craft to anyone who has built one.</span>
-      </div>
-      <figcaption class="cap">[FILL caption]</figcaption>
-    </figure>
-
-    <dl class="specs">
-      <div class="spec"><dt>ECU</dt><dd>MoTeC M130</dd></div>
-      <div class="spec"><dt>Scope</dt><dd>Full-vehicle harness<br>+ DAQ channels</dd></div>
-      <div class="spec"><dt>Tools</dt><dd>harness.design<br>MoTeC software</dd></div>
-      <div class="spec"><dt>Connectors</dt><dd>Deutsch (next build)</dd></div>
-    </dl>
-
-    <div class="blocks">
-      <div class="block">
-        <h4>Sensor integration</h4>
-        <p>
-          Wired a Honda CBR600RR knock sensor into the M130 &mdash; a three-wire active
-          sensor, so the work was in the interface and configuration, not just the
-          termination.
-        </p>
-        <p>[FILL: other channels you brought in &mdash; wheel speed, temps, pressures. List them.]</p>
-      </div>
-
-      <div class="block">
-        <h4>Failure analysis</h4>
-        <p>
-          After the season I documented what actually failed and why: bad pinning,
-          insufficient strain relief at termination points, and a thermal problem
-          with the ignitor mount.
-        </p>
-        <p>[FILL: how many failures, where, what the symptom was on-track.]</p>
-      </div>
-
-      <div class="block wide">
-        <h4>What changed for the next car</h4>
-        <ul>
-          <li>Virtual build in harness.design before cutting any wire, so lengths and branch points are decided on a model rather than on the chassis</li>
-          <li>Concentric twisting throughout, for mechanical durability and noise rejection on sensor runs</li>
-          <li>Service loops at every termination so a repair doesn&rsquo;t consume the wire&rsquo;s slack</li>
-          <li>Deutsch connectors at the breakpoints</li>
-          <li>Essential and non-essential circuits split, so a non-critical fault can&rsquo;t take the car off track</li>
-        </ul>
-      </div>
-
-      <div class="block">
-        <h4>Telemetry &amp; video</h4>
-        <p>
-          Built out a local wireless network on the car carrying M130 telemetry and
-          GoPro video over a GL.iNet Slate 7, so the team can see data during a
-          session rather than after it.
-        </p>
-      </div>
-
-      <div class="block">
-        <h4>Also</h4>
-        <p>
-          Assembled the pit cart documentation package the team works from at events,
-          and maintain the driver-in-the-loop simulator.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============ CH3 ============ -->
-<section class="proj" id="vault" style="--c:var(--ch3)">
-  <div class="wrap">
-    <div class="proj-head">
-      <span class="tag">CH3</span>
       <h3>Access Control System</h3>
     </div>
     <p class="oneline">
@@ -655,7 +475,7 @@
       <em>ECE 425L, with David Avshalom.</em>
     </p>
 
-    <!-- SWAP: replace with <img src="img/vault.jpg" alt="Vault system on the bench"> -->
+    <!-- SWAP: replace the .ph div with <img src="img/vault.jpg" alt="Vault system on the bench"> -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
         <span class="big">Video &mdash; the unlock sequence, 15 seconds</span>
@@ -730,6 +550,176 @@
   </div>
 </section>
 
+<!-- ============ CH2 ============ -->
+<section class="proj" id="harness" style="--c:var(--ch2)">
+  <div class="wrap">
+    <div class="proj-head">
+      <span class="tag">CH2</span>
+      <h3>Harness Repair &amp; Sensor Wiring</h3>
+    </div>
+    <p class="oneline">
+      Sensor circuits and connector repair on Matador Motorsports&rsquo; Formula SAE car.
+      I pinned the non-essential sensor circuits and diagnosed and re-terminated a set of
+      connections that were failing in service. Started as a volunteer; now on the
+      Controls subteam.
+    </p>
+
+    <!-- SWAP: replace the .ph div with <img src="img/harness.jpg" alt="Connector work on the car"> -->
+    <figure class="media" style="margin:0 0 34px">
+      <div class="ph">
+        <span class="big">Photo &mdash; connector work</span>
+        <span class="small">A close shot of a properly terminated connector with strain relief, or the crimp tooling on the bench. This is craft work and it photographs well.</span>
+      </div>
+      <figcaption class="cap">[FILL caption]</figcaption>
+    </figure>
+
+    <dl class="specs">
+      <div class="spec"><dt>ECU</dt><dd>MoTeC M130</dd></div>
+      <div class="spec"><dt>Circuits pinned</dt><dd>Shock pots &times;4<br>Rad-out temp<br>Knock sensor</dd></div>
+      <div class="spec"><dt>Repairs</dt><dd>34-pin MoTeC<br>Injector 1<br>AEM ignitor</dd></div>
+      <div class="spec"><dt>Role</dt><dd>Volunteer &rarr;<br>Controls subteam</dd></div>
+    </dl>
+
+    <div class="blocks">
+      <div class="block">
+        <h4>Sensor circuits pinned</h4>
+        <ul>
+          <li>Shock position potentiometers &mdash; front left, front right, rear left, rear right</li>
+          <li>Radiator outlet temperature</li>
+          <li>Knock sensor</li>
+        </ul>
+        <p>[FILL: roughly how many circuits total, and what tooling you used &mdash; crimper, extraction tools, which connector families.]</p>
+      </div>
+
+      <div class="block">
+        <h4>Knock sensor interface</h4>
+        <p>
+          The knock sensor is a three-wire part; the M130 input takes two. I re-pinned
+          it to the correct two-wire configuration so the ECU sees a usable signal
+          rather than a floating or mis-referenced one.
+        </p>
+        <p>[FILL: how you confirmed the signal was correct afterward &mdash; scope, MoTeC logging, engine running?]</p>
+      </div>
+
+      <div class="block wide fail">
+        <h4>What I found and fixed</h4>
+        <p>
+          Several terminations on the car were failing in service, and the failures
+          shared a cause: no strain relief at the termination, so vibration and handling
+          loads went straight into the crimp and broke conductors at the pin.
+        </p>
+        <ul>
+          <li><strong>34-pin MoTeC connector</strong> &mdash; wires breaking off at the pins. Re-pinned with proper strain relief.</li>
+          <li><strong>Injector 1</strong> &mdash; same failure mode, re-terminated.</li>
+          <li><strong>AEM ignitor</strong> &mdash; pinned to the wrong positions and unrelieved. Corrected the pinout and re-terminated.</li>
+        </ul>
+        <p>
+          The takeaway I carry forward: on a vehicle, connections fail at terminations,
+          and they fail mechanically before they fail electrically. Strain relief is not
+          a finishing touch.
+        </p>
+      </div>
+
+      <div class="block">
+        <h4>On the next harness</h4>
+        <p>[FILL: your own view, in your words. If the team has a plan for the next car and you contributed to it, say what part was yours. If it&rsquo;s the team&rsquo;s plan, say that &mdash; being clear about scope is worth more than claiming it.]</p>
+      </div>
+
+      <div class="block">
+        <h4>Also</h4>
+        <p>
+          Shadowed dyno and tuning sessions using MoTeC software, and worked on engine
+          diagnostics with the team.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CH3 ============ -->
+<section class="proj" id="dash" style="--c:var(--ch3)">
+  <div class="wrap">
+    <div class="proj-head">
+      <span class="tag">CH3</span>
+      <h3>Driver Display</h3>
+      <span class="label" style="color:var(--c);font-weight:600">In progress</span>
+    </div>
+    <p class="oneline">
+      A touchscreen driver display on an STM32H745I-DISCO, showing MoTeC ECU channels
+      over CAN, with the display logic generated from Simulink. Currently debugging the
+      integration between the generated code and the graphics stack.
+    </p>
+
+    <!-- SWAP: replace the .ph div with <img src="img/dash.jpg" alt="Display running on the dev board"> -->
+    <figure class="media" style="margin:0 0 34px">
+      <div class="ph">
+        <span class="big">Photo &mdash; the board on the bench</span>
+        <span class="small">The working TouchGFX render on the panel is a legitimate shot even though integration isn&rsquo;t finished. Show what exists.</span>
+      </div>
+      <figcaption class="cap">TouchGFX rendering on the H745 panel. [FILL caption]</figcaption>
+    </figure>
+
+    <dl class="specs">
+      <div class="spec"><dt>Board</dt><dd>STM32H745I-DISCO</dd></div>
+      <div class="spec"><dt>Graphics</dt><dd>TouchGFX</dd></div>
+      <div class="spec"><dt>Logic</dt><dd>Simulink /<br>Embedded Coder</dd></div>
+      <div class="spec"><dt>Data source</dt><dd>MoTeC ECU over CAN</dd></div>
+      <div class="spec"><dt>Status</dt><dd>Integration debug</dd></div>
+    </dl>
+
+    <div class="blocks">
+      <div class="block">
+        <h4>The goal</h4>
+        <p>
+          Put live engine and vehicle channels in front of the driver on a touchscreen,
+          with the display logic authored as a Simulink model and generated to C rather
+          than hand-written &mdash; so the team can change what&rsquo;s shown without
+          rewriting firmware.
+        </p>
+      </div>
+
+      <div class="block">
+        <h4>Where it stands</h4>
+        <p>
+          TouchGFX alone works: the panel initializes and renders images correctly.
+          Bringing in the Simulink-generated code produces a blank screen &mdash; the
+          board runs, but nothing draws.
+        </p>
+      </div>
+
+      <div class="block wide fail">
+        <h4>What I&rsquo;m working through</h4>
+        <p>
+          Because TouchGFX renders correctly on its own, the display panel, framebuffer,
+          and LTDC configuration are all known good. That isolates the fault to the
+          integration itself, which narrows it to a few candidates worth checking in order:
+        </p>
+        <ul>
+          <li>Generated initialization code re-configuring clocks or peripherals that TouchGFX already set up</li>
+          <li>The model&rsquo;s step function running in a context that blocks or starves the render task</li>
+          <li>Framebuffer memory overlapping a region the generated code claims</li>
+          <li>The generated code never reaching the draw calls at all &mdash; a fault or hang before first render</li>
+        </ul>
+        <p>[FILL: what you&rsquo;ve ruled out so far and how. Debugger? Toggling a GPIO to confirm the loop runs? This section is the whole value of showing an unfinished project &mdash; write down the actual method.]</p>
+      </div>
+
+      <div class="block">
+        <h4>Next</h4>
+        <p>[FILL: what you&rsquo;re trying next, in one or two sentences.]</p>
+      </div>
+
+      <div class="block">
+        <h4>Related</h4>
+        <p>
+          Also working on two STM32G431 CAN nodes &mdash; one sending, one receiving &mdash;
+          programmed through Simulink and Embedded Coder, as a way into the CAN toolchain.
+          [FILL: status of this one.]
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ============ CH4 ============ -->
 <section class="proj" id="spi" style="--c:var(--ch4)">
   <div class="wrap">
@@ -738,25 +728,25 @@
       <h3>AXI Quad SPI Controller</h3>
     </div>
     <p class="oneline">
-      An AXI Quad SPI IP block written in VHDL and deployed on a Zybo Z7-10, verified
-      with a self-checking testbench.
-      <em>ECE 420.</em>
+      An AXI Quad SPI controller written in VHDL and verified in simulation with a
+      self-checking testbench. RTL and verification only &mdash; not synthesized to
+      hardware. <em>ECE 420.</em>
     </p>
 
-    <!-- SWAP: replace with <img src="img/sim.png" alt="Simulation waveform"> -->
+    <!-- SWAP: replace the .ph div with <img src="img/sim.png" alt="Simulation waveform"> -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
-        <span class="big">Screenshot &mdash; simulation waveform or block diagram</span>
-        <span class="small">A waveform showing a correct SPI transaction, or the Vivado block design. Either works.</span>
+        <span class="big">Screenshot &mdash; simulation waveform</span>
+        <span class="small">A waveform showing a correct SPI transaction, with the testbench assertions passing.</span>
       </div>
       <figcaption class="cap">[FILL caption]</figcaption>
     </figure>
 
     <dl class="specs">
-      <div class="spec"><dt>Target</dt><dd>Zybo Z7-10<br>Zynq-7000</dd></div>
       <div class="spec"><dt>Language</dt><dd>VHDL</dd></div>
       <div class="spec"><dt>Interface</dt><dd>AXI</dd></div>
       <div class="spec"><dt>Verification</dt><dd>Self-checking testbench</dd></div>
+      <div class="spec"><dt>Scope</dt><dd>Simulation only</dd></div>
     </dl>
 
     <div class="blocks">
@@ -805,7 +795,7 @@
         </div>
         <div class="row">
           <span class="k">ECE 420</span>
-          <span>Digital design &mdash; VHDL, FPGA, verification</span>
+          <span>Digital design &mdash; VHDL and simulation-based verification</span>
         </div>
         <div class="row">
           <span class="k">ECE 351</span>
@@ -824,16 +814,16 @@
           Bare-metal C on ARM Cortex-M, FreeRTOS, CAN, I&sup2;C, SPI, ADC, timers, PWM, interrupt handling</p>
 
         <p><strong>Hardware</strong>
-          Wiring harness design and build, connector pinning and de-pinning, soldering, sensor integration, protection circuit design</p>
+          Connector pinning, de-pinning, and repair; crimp termination and strain relief; soldering; sensor wiring and integration</p>
 
         <p><strong>Vehicle systems</strong>
-          MoTeC M130 / M150 configuration and logging, dyno and tuning sessions, engine diagnostics, electronic throttle body evaluation against FSAE rules</p>
+          MoTeC M130 logging and diagnostics; dyno and tuning sessions (shadowed); Formula SAE electrical rules</p>
 
         <p><strong>Digital design</strong>
-          VHDL, FPGA deployment, self-checking testbenches, AXI</p>
+          VHDL, self-checking testbenches, AXI</p>
 
         <p><strong>Software &amp; tools</strong>
-          MATLAB, Simulink and Embedded Coder, PSpice, harness.design, Git</p>
+          MATLAB, Simulink and Embedded Coder, PSpice, Git</p>
       </div>
     </div>
   </div>
@@ -842,7 +832,7 @@
 </main>
 
 <footer>
-  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;width:100%">
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
     <span>Ethan Ranaei &middot; ethan.ranaei.562@my.csun.edu</span>
     <span>Last updated [FILL month year]</span>
   </div>
@@ -850,4 +840,3 @@
 
 </body>
 </html>
-
