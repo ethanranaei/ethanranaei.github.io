@@ -3,16 +3,18 @@
   ============================================================
   ETHAN RANAEI — PORTFOLIO
   ============================================================
-  TO ADD PHOTOS:
-    - Make a folder called  img/  in the repo, upload your photos there
-    - Find the blocks marked  SWAP:  below
-    - Replace the placeholder <div class="ph">...</div> with:
-      <img src="img/yourfile.jpg" alt="what it shows">
+  TO ADD PHOTOS / VIDEO TO THE CAROUSEL:
+    - Upload files to an  img/  folder in the repo
+    - Find  CAROUSEL SLIDES  in the CH2 section
+    - Each slide is a <div class="slide">. Add or remove them freely.
+      Photo slide:  <div class="slide" data-cap="..."><img src="img/x.jpg" alt="..."></div>
+      Video slide:  use the YouTube iframe pattern shown in slide 1
+    - The arrows, dots, and counter adjust automatically
 
   TO MAKE THE PDF VERSION:
     - Open the live site, press Cmd/Ctrl+P, "Save as PDF"
 
-  SEARCH FOR  [FILL]  TO FIND EVERY SPOT THAT NEEDS YOUR REAL NUMBERS.
+  SEARCH FOR  [FILL]  TO FIND EVERY SPOT THAT NEEDS YOUR REAL DETAILS.
   ============================================================
 -->
 <html lang="en">
@@ -266,6 +268,91 @@
     border-top:1px solid var(--rule-soft);
   }
 
+  /* ---------- carousel ---------- */
+  .carousel{
+    background:var(--card);
+    border:1px solid var(--rule);
+    border-top:3px solid var(--c);
+    margin-bottom:34px;
+  }
+  .stage{
+    position:relative;
+    aspect-ratio:16/9;
+    overflow:hidden;
+    background:#0e1114;
+  }
+  .slide{
+    position:absolute;
+    inset:0;
+    display:none;
+  }
+  .slide.on{display:block}
+  .slide img{
+    width:100%;height:100%;
+    object-fit:contain;
+    display:block;
+  }
+  .slide iframe{
+    width:100%;height:100%;
+    border:0;display:block;
+  }
+  .slide .ph{
+    height:100%;
+    aspect-ratio:auto;
+    background:
+      repeating-linear-gradient(45deg,#15191d,#15191d 11px,#1b2025 11px,#1b2025 22px);
+  }
+  .slide .ph .big,.slide .ph .small{color:#8b949d}
+
+  .arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:42px;height:42px;
+    border:0;
+    background:rgba(255,255,255,.9);
+    color:var(--ink);
+    font-size:19px;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:background .15s ease;
+  }
+  .arrow:hover{background:#fff}
+  .arrow.prev{left:12px}
+  .arrow.next{right:12px}
+
+  .carousel-bar{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:9px 13px;
+    border-top:1px solid var(--rule-soft);
+  }
+  .counter{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+    white-space:nowrap;
+  }
+  .dots{display:flex;gap:6px}
+  .dot{
+    width:7px;height:7px;
+    border:0;padding:0;
+    background:var(--rule);
+    cursor:pointer;
+  }
+  .dot.on{background:var(--c)}
+  .slide-cap{
+    font-family:var(--mono);
+    font-size:11.5px;
+    color:var(--muted);
+    margin:0;
+    line-height:1.5;
+  }
+
   .specs{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
@@ -389,9 +476,12 @@
   @media print{
     body{background:#fff;font-size:10.5pt}
     .wrap{max-width:none;padding:0}
-    .index,.repo{display:none}
+    .index,.repo,.arrow,.dots{display:none}
     .proj{page-break-before:always;border-top:0;margin-top:0;padding-top:0}
     .ph{aspect-ratio:auto;height:150px}
+    .stage{aspect-ratio:auto;height:220px}
+    .slide{position:static;display:none}
+    .slide.on{display:block}
     header.top{padding-top:0}
     .name{font-size:44pt}
     a{text-decoration:none}
@@ -450,9 +540,9 @@
 
       <a class="chan" href="#spi" style="--c:var(--ch4)">
         <span class="chan-id">CH4</span>
-        <span class="chan-name">AXI Quad SPI Controller</span>
-        <span class="chan-meta">VHDL &middot; Simulation</span>
-        <span class="chan-year">2025</span>
+        <span class="chan-name">AXI Quad SPI Bring-Up &amp; Verification</span>
+        <span class="chan-meta">Zybo Z7-10 &middot; Vivado</span>
+        <span class="chan-year">2026</span>
       </a>
 
     </nav>
@@ -475,13 +565,13 @@
       <em>ECE 425L, with David Avshalom.</em>
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/vault.jpg" alt="Vault system on the bench"> -->
+    <!-- SWAP: replace the .ph div with the YouTube iframe for your 60s video -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
-        <span class="big">Video &mdash; the unlock sequence, 15 seconds</span>
-        <span class="small">Hand approaches, display wakes, code entered, motor drives the lock open. Phone footage is fine. A working electromechanical demo is the strongest thing on this page.</span>
+        <span class="big">Video &mdash; the unlock sequence</span>
+        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here. A working electromechanical demo is the strongest thing on this page.</span>
       </div>
-      <figcaption class="cap">Enclosure is cardboard &mdash; the electronics and firmware are the project. [FILL caption]</figcaption>
+      <figcaption class="cap">Enclosure is cardboard &mdash; the electronics and firmware are the project. [FILL: note the timestamp where the stepper actuates.]</figcaption>
     </figure>
 
     <dl class="specs">
@@ -559,24 +649,75 @@
     </div>
     <p class="oneline">
       Sensor circuits and connector repair on Matador Motorsports&rsquo; Formula SAE car.
-      I pinned the non-essential sensor circuits and diagnosed and re-terminated a set of
-      connections that were failing in service. Started as a volunteer; now on the
-      Controls subteam.
+      I pinned the non-essential sensor circuits, verified sensor signals on the scope,
+      and diagnosed and re-terminated a set of connections that were failing in service.
+      Started as a volunteer; now on the Controls subteam.
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/harness.jpg" alt="Connector work on the car"> -->
-    <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Photo &mdash; connector work</span>
-        <span class="small">A close shot of a properly terminated connector with strain relief, or the crimp tooling on the bench. This is craft work and it photographs well.</span>
+    <!-- ================= CAROUSEL ================= -->
+    <div class="carousel" data-carousel>
+      <div class="stage">
+
+        <!-- CAROUSEL SLIDES — add, remove, or reorder freely -->
+
+        <!-- Slide 1 — knock sensor scope video -->
+        <div class="slide on" data-cap="Knock sensor after re-pinning &mdash; signal verified on the oscilloscope. [FILL: what the trace shows and what you were checking for.]">
+          <div class="ph">
+            <span class="big">Video &mdash; knock sensor signal on the scope</span>
+            <span class="small">Replace this whole &lt;div class="ph"&gt; with:<br>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen title="Knock sensor signal verification"&gt;&lt;/iframe&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Photo &mdash; connector work</span>
+            <span class="small">Replace with:  &lt;img src="img/harness-1.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Photo &mdash; 20-pin dashboard connector</span>
+            <span class="small">Replace with:  &lt;img src="img/harness-2.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Photo &mdash; harness routing on the car</span>
+            <span class="small">Replace with:  &lt;img src="img/harness-3.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Photo &mdash; crimp tooling / bench setup</span>
+            <span class="small">Replace with:  &lt;img src="img/harness-4.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- END CAROUSEL SLIDES -->
+
+        <button class="arrow prev" aria-label="Previous">&#8249;</button>
+        <button class="arrow next" aria-label="Next">&#8250;</button>
       </div>
-      <figcaption class="cap">[FILL caption]</figcaption>
-    </figure>
+
+      <div class="carousel-bar">
+        <span class="counter"></span>
+        <span class="dots"></span>
+        <p class="slide-cap"></p>
+      </div>
+    </div>
+    <!-- =============== END CAROUSEL =============== -->
 
     <dl class="specs">
       <div class="spec"><dt>ECU</dt><dd>MoTeC M130</dd></div>
       <div class="spec"><dt>Circuits pinned</dt><dd>Shock pots &times;4<br>Rad-out temp<br>Knock sensor</dd></div>
-      <div class="spec"><dt>Repairs</dt><dd>34-pin MoTeC<br>Injector 1<br>AEM ignitor</dd></div>
+      <div class="spec"><dt>Repairs</dt><dd>34-pin MoTeC<br>20-pin dash<br>Injector 1<br>AEM ignitor</dd></div>
       <div class="spec"><dt>Role</dt><dd>Volunteer &rarr;<br>Controls subteam</dd></div>
     </dl>
 
@@ -595,22 +736,24 @@
         <h4>Knock sensor interface</h4>
         <p>
           The knock sensor is a three-wire part; the M130 input takes two. I re-pinned
-          it to the correct two-wire configuration so the ECU sees a usable signal
-          rather than a floating or mis-referenced one.
+          it to the correct two-wire configuration, then verified on an oscilloscope
+          that the ECU was seeing a correct signal rather than a floating or
+          mis-referenced one.
         </p>
-        <p>[FILL: how you confirmed the signal was correct afterward &mdash; scope, MoTeC logging, engine running?]</p>
+        <p>[FILL: what amplitude and frequency range you expected, and how you excited the sensor to test it.]</p>
       </div>
 
       <div class="block wide fail">
         <h4>What I found and fixed</h4>
         <p>
-          Several terminations on the car were failing in service, and the failures
-          shared a cause: no strain relief at the termination, so vibration and handling
-          loads went straight into the crimp and broke conductors at the pin.
+          Several terminations on the car were failing in service, and most shared a
+          cause: no strain relief at the termination, so vibration and handling loads
+          went straight into the crimp and broke conductors at the pin.
         </p>
         <ul>
           <li><strong>34-pin MoTeC connector</strong> &mdash; wires breaking off at the pins. Re-pinned with proper strain relief.</li>
-          <li><strong>Injector 1</strong> &mdash; same failure mode, re-terminated.</li>
+          <li><strong>20-pin dashboard connector</strong> &mdash; connector body damaged. Replaced the connector and re-pinned the circuits into it.</li>
+          <li><strong>Injector 1</strong> &mdash; same strain-relief failure mode, re-terminated.</li>
           <li><strong>AEM ignitor</strong> &mdash; pinned to the wrong positions and unrelieved. Corrected the pinout and re-terminated.</li>
         </ul>
         <p>
@@ -726,50 +869,87 @@
   <div class="wrap">
     <div class="proj-head">
       <span class="tag">CH4</span>
-      <h3>AXI Quad SPI Controller</h3>
+      <h3>AXI Quad SPI Bring-Up &amp; Verification</h3>
     </div>
     <p class="oneline">
-      An AXI Quad SPI controller written in VHDL and verified in simulation with a
-      self-checking testbench. RTL and verification only &mdash; not synthesized to
-      hardware. <em>ECE 420.</em>
+      Integrated Xilinx&rsquo;s AXI Quad SPI IP core on a Zybo Z7-10, drove it over
+      AXI4-Lite in internal loopback, and got a self-checking testbench passing in
+      behavioral simulation. <em>ECE 420 final project, Spring 2026.</em>
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/sim.png" alt="Simulation waveform"> -->
+    <!-- SWAP: replace the .ph div with <img src="img/axi-spi-sim.png" alt="Vivado behavioral simulation showing an AXI write transaction and a passing testbench"> -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
         <span class="big">Screenshot &mdash; simulation waveform</span>
-        <span class="small">A waveform showing a correct SPI transaction, with the testbench assertions passing.</span>
+        <span class="small">Use the cropped Vivado capture: AXI write transaction, state machine, and TEST PASSED in the console.</span>
       </div>
-      <figcaption class="cap">[FILL caption]</figcaption>
+      <figcaption class="cap">Behavioral simulation &mdash; AXI write transaction, controller state machine, and the self-checking testbench reporting a pass.</figcaption>
     </figure>
 
     <dl class="specs">
-      <div class="spec"><dt>Language</dt><dd>VHDL</dd></div>
-      <div class="spec"><dt>Interface</dt><dd>AXI</dd></div>
-      <div class="spec"><dt>Verification</dt><dd>Self-checking testbench</dd></div>
-      <div class="spec"><dt>Scope</dt><dd>Simulation only</dd></div>
+      <div class="spec"><dt>Target</dt><dd>Zybo Z7-10<br>Zynq-7000</dd></div>
+      <div class="spec"><dt>Clock</dt><dd>125 MHz<br>via MMCM</dd></div>
+      <div class="spec"><dt>Interface</dt><dd>AXI4-Lite (A1&ndash;A3)</dd></div>
+      <div class="spec"><dt>DUT</dt><dd>Xilinx AXI Quad SPI IP</dd></div>
+      <div class="spec"><dt>Scope</dt><dd>Behavioral simulation<br>(no lab section)</dd></div>
     </dl>
 
     <div class="blocks">
       <div class="block">
-        <h4>What it does</h4>
-        <p>[FILL: what the block is responsible for, what it talks to, and what you had to get right.]</p>
-      </div>
-      <div class="block">
-        <h4>Verification approach</h4>
+        <h4>The problem</h4>
         <p>
-          Written with a self-checking testbench so failures are reported by the
-          test rather than found by eye in a waveform viewer.
+          Read the AXI4-Lite specification cold &mdash; it wasn&rsquo;t covered in
+          lecture &mdash; and use it to drive a vendor IP core&rsquo;s register map:
+          configure the SPI control register, load the transmit FIFO, start a
+          transfer, and read the result back.
         </p>
-        <p>[FILL: what cases it covers.]</p>
       </div>
-      <div class="block wide">
-        <h4>Also from this course</h4>
-        <p>A parameterized FIFO with its own testbench. [FILL: depth/width parameterization, what the testbench checks.]</p>
+
+      <div class="block">
+        <h4>Verification without external hardware</h4>
+        <p>
+          The core runs in internal loopback: setting the LOOP bit in SPICR routes
+          MOSI back to MISO inside the IP, so no external SPI slave is needed. Transmit
+          <code>0xA5</code> and the expected value is definitionally the same byte
+          coming back &mdash; a golden value you can prove rather than measure.
+        </p>
+      </div>
+
+      <div class="block wide fail">
+        <h4>Two failures that took real debugging</h4>
+        <ul>
+          <li>
+            <strong>Elaboration error on the clock wizard.</strong> The generated MMCM
+            had active-low reset enabled, but the component declaration was missing the
+            <code>resetn</code> port. The tool error pointed at the instantiation; the
+            actual cause was in how the IP had been configured.
+          </li>
+          <li>
+            <strong>Simulation hung with the test never passing.</strong> The IP had been
+            generated with STARTUPE2 enabled, which internalizes the SPI clock and
+            replaces the <code>sck_i</code>/<code>sck_o</code>/<code>sck_t</code> ports
+            with <code>cfgclk</code>, <code>cfgmclk</code>, <code>eos</code>, and
+            <code>preq</code>. STARTUPE2 doesn&rsquo;t function in behavioral simulation
+            at all, so the transfer could never complete. Regenerating the IP with
+            STARTUPE2 disabled restored the standard SCK ports and the test passed.
+          </li>
+        </ul>
+        <p>
+          Both were configuration faults inside a vendor IP rather than logic errors,
+          and neither was visible from the error message alone.
+        </p>
+      </div>
+
+      <div class="block">
+        <h4>My contribution</h4>
+        <p>[FILL: state plainly what you did here &mdash; IP configuration, Vivado project setup, running the simulation, diagnosing the two failures &mdash; and how the RTL came together. An interviewer will ask; the version you write yourself is the one you can defend.]</p>
+      </div>
+
+      <div class="block">
+        <h4>What I&rsquo;d change</h4>
+        <p>[FILL: e.g. taking it to hardware, adding directed tests beyond the single loopback case, or checking AXI response codes rather than just the data.]</p>
       </div>
     </div>
-
-    <a class="repo" href="#">View source &rarr; [FILL repo link]</a>
   </div>
 </section>
 
@@ -784,7 +964,7 @@
 
         <div class="row">
           <span class="k">CSUN</span>
-          <span>B.S. Computer Engineering &mdash; expected [FILL graduation date]</span>
+          <span>B.S. Computer Engineering &mdash; expected May 2027</span>
         </div>
         <div class="row">
           <span class="k">ECE 492</span>
@@ -796,7 +976,7 @@
         </div>
         <div class="row">
           <span class="k">ECE 420</span>
-          <span>Digital design &mdash; VHDL and simulation-based verification</span>
+          <span>Digital design &mdash; VHDL, AXI4-Lite, Vivado simulation and verification</span>
         </div>
         <div class="row">
           <span class="k">ECE 351</span>
@@ -815,16 +995,16 @@
           Bare-metal C on ARM Cortex-M, CAN, I&sup2;C, SPI, ADC, timers, PWM, interrupt handling</p>
 
         <p><strong>Hardware</strong>
-          Connector pinning, de-pinning, and repair; crimp termination and strain relief; soldering; sensor wiring and integration</p>
+          Connector pinning, de-pinning, and repair; crimp termination and strain relief; soldering; sensor wiring and integration; oscilloscope signal verification</p>
 
         <p><strong>Vehicle systems</strong>
           MoTeC M130 logging and diagnostics; dyno and tuning sessions (shadowed); Formula SAE electrical rules</p>
 
         <p><strong>Digital design</strong>
-          VHDL, self-checking testbenches, AXI</p>
+          VHDL, AXI4-Lite, self-checking testbenches</p>
 
         <p><strong>Software &amp; tools</strong>
-          MATLAB, Simulink and Embedded Coder, STM32CubeIDE, TouchGFX, PSpice, Git</p>
+          MATLAB, Simulink and Embedded Coder, STM32CubeIDE, TouchGFX, Vivado, KiCad, PSpice, Git</p>
       </div>
     </div>
   </div>
@@ -838,6 +1018,48 @@
     <span>Last updated [FILL month year]</span>
   </div>
 </footer>
+
+<script>
+document.querySelectorAll('[data-carousel]').forEach(function(car){
+  var slides  = Array.prototype.slice.call(car.querySelectorAll('.slide'));
+  var counter = car.querySelector('.counter');
+  var dotsBox = car.querySelector('.dots');
+  var capBox  = car.querySelector('.slide-cap');
+  var i = 0;
+
+  if(slides.length < 2){
+    car.querySelector('.prev').style.display = 'none';
+    car.querySelector('.next').style.display = 'none';
+  }
+
+  slides.forEach(function(s, n){
+    var d = document.createElement('button');
+    d.className = 'dot';
+    d.setAttribute('aria-label', 'Go to item ' + (n+1));
+    d.addEventListener('click', function(){ go(n); });
+    dotsBox.appendChild(d);
+  });
+
+  function go(n){
+    i = (n + slides.length) % slides.length;
+    slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
+    dotsBox.querySelectorAll('.dot').forEach(function(d, k){ d.classList.toggle('on', k === i); });
+    counter.textContent = (i+1) + ' / ' + slides.length;
+    capBox.innerHTML = slides[i].getAttribute('data-cap') || '';
+  }
+
+  car.querySelector('.prev').addEventListener('click', function(){ go(i-1); });
+  car.querySelector('.next').addEventListener('click', function(){ go(i+1); });
+
+  car.setAttribute('tabindex','0');
+  car.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft')  { go(i-1); e.preventDefault(); }
+    if(e.key === 'ArrowRight') { go(i+1); e.preventDefault(); }
+  });
+
+  go(0);
+});
+</script>
 
 </body>
 </html>
