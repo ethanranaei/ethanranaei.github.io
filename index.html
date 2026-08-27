@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  ETHAN RANAEI — PORTFOLIO
+  ETHAN RANAEI - PORTFOLIO
   ============================================================
-  TO ADD PHOTOS / VIDEO TO THE CAROUSEL:
+  TO ADD PHOTOS / VIDEO:
     - Upload files to an  img/  folder in the repo
-    - Find  CAROUSEL SLIDES  in the CH2 section
+    - Find  CAROUSEL SLIDES  in the CH2 and CH3 sections
     - Each slide is a <div class="slide">. Add or remove them freely.
       Photo slide:  <div class="slide" data-cap="..."><img src="img/x.jpg" alt="..."></div>
-      Video slide:  use the YouTube iframe pattern shown in slide 1
+      Video slide:  use the YouTube iframe pattern shown in CH2 slide 1
     - The arrows, dots, and counter adjust automatically
 
   TO MAKE THE PDF VERSION:
@@ -21,7 +21,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ethan Ranaei — Embedded &amp; Controls Engineering</title>
+<title>Ethan Ranaei | Embedded &amp; Controls Engineering</title>
 <meta name="description" content="Computer Engineering student at CSUN. Embedded firmware, vehicle electronics, and sensor wiring on Formula SAE.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -178,6 +178,12 @@
     font-size:25px;
     font-weight:600;
     line-height:1.12;
+  }
+  .chan-note{
+    font-style:normal;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--muted);
   }
   .chan-meta,.chan-year{
     font-family:var(--mono);
@@ -496,7 +502,7 @@
     <h1 class="name">Ethan<br>Ranaei</h1>
     <p class="tagline">
       Computer Engineering student working on embedded firmware and vehicle
-      electronics &mdash; bare-metal C, sensor wiring, and connector repair on a
+      electronics: bare-metal C, sensor wiring, and connector work on a
       Formula SAE car.
     </p>
 
@@ -526,21 +532,21 @@
 
       <a class="chan" href="#harness" style="--c:var(--ch2)">
         <span class="chan-id">CH2</span>
-        <span class="chan-name">Harness Repair &amp; Sensor Wiring</span>
+        <span class="chan-name">Harness Build &amp; Connector Repair</span>
         <span class="chan-meta">MoTeC M130 &middot; Formula SAE</span>
         <span class="chan-year">2026</span>
       </a>
 
       <a class="chan" href="#dash" style="--c:var(--ch3)">
         <span class="chan-id">CH3</span>
-        <span class="chan-name">Driver Display <em style="font-style:normal;font-family:var(--mono);font-size:12px;color:var(--muted)">&mdash; in progress</em></span>
+        <span class="chan-name">Driver Display <em class="chan-note">(in progress)</em></span>
         <span class="chan-meta">STM32H745 &middot; TFT &middot; CAN</span>
         <span class="chan-year">2026</span>
       </a>
 
       <a class="chan" href="#spi" style="--c:var(--ch4)">
         <span class="chan-id">CH4</span>
-        <span class="chan-name">AXI Quad SPI Bring-Up &amp; Verification</span>
+        <span class="chan-name">AXI Quad SPI <em class="chan-note">(coursework)</em></span>
         <span class="chan-meta">Zybo Z7-10 &middot; Vivado</span>
         <span class="chan-year">2026</span>
       </a>
@@ -560,18 +566,17 @@
     </div>
     <p class="oneline">
       A passcode-controlled locking system on a TI TM4C123, written bare-metal in C
-      against the register headers &mdash; no HAL, no RTOS. Six peripheral subsystems
-      brought up from scratch and made to work together.
-      <em>ECE 425L, with David Avshalom.</em>
+      against the register headers, with no HAL and no RTOS. Six peripheral subsystems
+      brought up from scratch and made to work together. <em>ECE 425L.</em>
     </p>
 
     <!-- SWAP: replace the .ph div with the YouTube iframe for your 60s video -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
-        <span class="big">Video &mdash; the unlock sequence</span>
-        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here. A working electromechanical demo is the strongest thing on this page.</span>
+        <span class="big">Video: the unlock sequence</span>
+        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here.</span>
       </div>
-      <figcaption class="cap">Enclosure is cardboard &mdash; the electronics and firmware are the project. [FILL: note the timestamp where the stepper actuates.]</figcaption>
+      <figcaption class="cap">Full sequence: proximity wake, code entry at 0:22, then stepper actuation. Enclosure is cardboard. The electronics and firmware are the project.</figcaption>
     </figure>
 
     <dl class="specs">
@@ -586,8 +591,8 @@
       <div class="block">
         <h4>Design decisions</h4>
         <ul>
-          <li><strong>Hysteresis on the proximity wake.</strong> The photocell threshold uses separate assert and release points (1.2&nbsp;V / 0.7&nbsp;V) with a state latch, so the display doesn&rsquo;t chatter when ambient light sits near the boundary.</li>
-          <li><strong>Debounce with confirm-and-release.</strong> Edge detect, 20&nbsp;ms settle, re-read to confirm, then block until the button is released &mdash; rather than trusting a single sample.</li>
+          <li><strong>Hysteresis on the proximity wake.</strong> The photocell threshold uses separate assert and release points (1.2&nbsp;V and 0.7&nbsp;V) with a state latch, so the display doesn&rsquo;t chatter when ambient light sits near the boundary.</li>
+          <li><strong>Debounce with confirm-and-release.</strong> Edge detect, 20&nbsp;ms settle, re-read to confirm, then block until the button is released, rather than trusting a single sample.</li>
           <li><strong>Timer-gated tone generation.</strong> Timer0 in periodic mode at 1&nbsp;&micro;s ticks sets buzzer frequency, instead of tuning loop counts by ear.</li>
           <li><strong>Modular bring-up.</strong> Each peripheral has its own init and control functions so subsystems could be tested in isolation before integration.</li>
         </ul>
@@ -599,15 +604,15 @@
           The stepper runs an eight-state half-step table on <code>PB0&ndash;PB3</code>
           through a ULN2003 driver, indexed forward for unlock and reversed for lock.
           Coils are de-energized at the end of every move so the motor isn&rsquo;t
-          holding current &mdash; and heating &mdash; while idle.
+          holding current, and heating, while idle.
         </p>
       </div>
 
       <div class="block wide fail">
         <h4>The failure that taught the most</h4>
         <p>
-          The first build used a servo. Under load the system would freeze and reset
-          &mdash; but only when the servo moved. The servo, LCD, and buzzer were all
+          The first build used a servo. Under load the system would freeze and reset,
+          but only when the servo moved. The servo, LCD, and buzzer were all
           drawing from the microcontroller&rsquo;s supply, and the inrush when the servo
           started was pulling the rail below the brown-out threshold.
         </p>
@@ -623,7 +628,7 @@
       <div class="block">
         <h4>What I&rsquo;d change</h4>
         <p>
-          The delay functions are busy-wait loops &mdash; fragile under compiler
+          The delay functions are busy-wait loops, which are fragile under compiler
           optimization and blocking for the whole system. I&rsquo;d move timing to
           SysTick and restructure the main loop as a non-blocking state machine, so
           input stays responsive while the motor runs.
@@ -631,8 +636,11 @@
       </div>
 
       <div class="block">
-        <h4>Split of work</h4>
-        <p>[FILL: say plainly which subsystems were yours and which were David&rsquo;s. Specific credit reads better than vague &ldquo;we&rdquo;.]</p>
+        <h4>Scope</h4>
+        <p>
+          This was a two-person course project. I did the hardware build and wrote all
+          of the firmware; my partner handled the class presentation.
+        </p>
       </div>
     </div>
 
@@ -645,25 +653,25 @@
   <div class="wrap">
     <div class="proj-head">
       <span class="tag">CH2</span>
-      <h3>Harness Repair &amp; Sensor Wiring</h3>
+      <h3>Harness Build &amp; Connector Repair</h3>
     </div>
     <p class="oneline">
-      Sensor circuits and connector repair on Matador Motorsports&rsquo; Formula SAE car.
-      I pinned the non-essential sensor circuits, verified sensor signals on the scope,
-      and diagnosed and re-terminated a set of connections that were failing in service.
-      Started as a volunteer; now on the Controls subteam.
+      Wiring work on Matador Motorsports&rsquo; Formula SAE car. I worked on the
+      non-essential harness build, wired and verified the knock sensor, and repaired
+      several failing connections on the main harness. Started as a volunteer; now on
+      the Controls subteam and taking on the full harness for this year&rsquo;s car.
     </p>
 
     <!-- ================= CAROUSEL ================= -->
     <div class="carousel" data-carousel>
       <div class="stage">
 
-        <!-- CAROUSEL SLIDES — add, remove, or reorder freely -->
+        <!-- CAROUSEL SLIDES: add, remove, or reorder freely -->
 
-        <!-- Slide 1 — knock sensor scope video -->
-        <div class="slide on" data-cap="Knock sensor after re-pinning &mdash; signal verified on the oscilloscope. [FILL: what the trace shows and what you were checking for.]">
+        <!-- Slide 1: knock sensor scope video -->
+        <div class="slide on" data-cap="Knock sensor after re-pinning. Striking the sensor with a wrench produces a visible signal on the scope, confirming the wiring is correct.">
           <div class="ph">
-            <span class="big">Video &mdash; knock sensor signal on the scope</span>
+            <span class="big">Video: knock sensor signal on the scope</span>
             <span class="small">Replace this whole &lt;div class="ph"&gt; with:<br>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen title="Knock sensor signal verification"&gt;&lt;/iframe&gt;</span>
           </div>
         </div>
@@ -671,7 +679,7 @@
         <!-- Slide 2 -->
         <div class="slide" data-cap="[FILL caption]">
           <div class="ph">
-            <span class="big">Photo &mdash; connector work</span>
+            <span class="big">Photo: connector work</span>
             <span class="small">Replace with:  &lt;img src="img/harness-1.jpg" alt="..."&gt;</span>
           </div>
         </div>
@@ -679,7 +687,7 @@
         <!-- Slide 3 -->
         <div class="slide" data-cap="[FILL caption]">
           <div class="ph">
-            <span class="big">Photo &mdash; 20-pin dashboard connector</span>
+            <span class="big">Photo: harness on the car</span>
             <span class="small">Replace with:  &lt;img src="img/harness-2.jpg" alt="..."&gt;</span>
           </div>
         </div>
@@ -687,16 +695,8 @@
         <!-- Slide 4 -->
         <div class="slide" data-cap="[FILL caption]">
           <div class="ph">
-            <span class="big">Photo &mdash; harness routing on the car</span>
+            <span class="big">Photo: bench setup / tooling</span>
             <span class="small">Replace with:  &lt;img src="img/harness-3.jpg" alt="..."&gt;</span>
-          </div>
-        </div>
-
-        <!-- Slide 5 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Photo &mdash; crimp tooling / bench setup</span>
-            <span class="small">Replace with:  &lt;img src="img/harness-4.jpg" alt="..."&gt;</span>
           </div>
         </div>
 
@@ -716,56 +716,76 @@
 
     <dl class="specs">
       <div class="spec"><dt>ECU</dt><dd>MoTeC M130</dd></div>
-      <div class="spec"><dt>Circuits pinned</dt><dd>Shock pots &times;4<br>Rad-out temp<br>Knock sensor</dd></div>
-      <div class="spec"><dt>Repairs</dt><dd>34-pin MoTeC<br>20-pin dash<br>Injector 1<br>AEM ignitor</dd></div>
+      <div class="spec"><dt>Non-essential<br>harness</dt><dd>Cut to length,<br>pinning, connectors,<br>continuity checks</dd></div>
+      <div class="spec"><dt>Main harness<br>repairs</dt><dd>34-pin MoTeC<br>Injector<br>AEM ignitor</dd></div>
+      <div class="spec"><dt>Sensors wired</dt><dd>Shock pots &times;4<br>Rad-out temp<br>Knock sensor</dd></div>
       <div class="spec"><dt>Role</dt><dd>Volunteer &rarr;<br>Controls subteam</dd></div>
     </dl>
 
     <div class="blocks">
       <div class="block">
-        <h4>Sensor circuits pinned</h4>
-        <ul>
-          <li>Shock position potentiometers &mdash; front left, front right, rear left, rear right</li>
-          <li>Radiator outlet temperature</li>
-          <li>Knock sensor</li>
-        </ul>
-        <p>[FILL: roughly how many circuits total, and what tooling you used &mdash; crimper, extraction tools, which connector families.]</p>
+        <h4>Non-essential harness</h4>
+        <p>
+          I worked on the non-essential harness alongside the team rather than building
+          it alone: cutting wires to length, crimping pins, fitting connectors, and
+          checking continuity on the finished circuits before it went on the car.
+        </p>
+        <p>
+          The sensor circuits I wired were the four shock position potentiometers, the
+          radiator outlet temperature sensor, and the knock sensor. I also replaced the
+          20-pin dashboard connector after its body was damaged, and re-pinned the
+          circuits into the new one. That connector carries the CAN bus for additional
+          sensors and signals routed through the dash.
+        </p>
       </div>
 
       <div class="block">
-        <h4>Knock sensor interface</h4>
+        <h4>Knock sensor</h4>
         <p>
-          The knock sensor is a three-wire part; the M130 input takes two. I re-pinned
-          it to the correct two-wire configuration, then verified on an oscilloscope
-          that the ECU was seeing a correct signal rather than a floating or
-          mis-referenced one.
+          The knock sensor is a three-wire part, but the M130 input takes two. I re-pinned
+          it to the correct two-wire configuration so the ECU would see a usable signal
+          rather than a floating or mis-referenced one.
         </p>
-        <p>[FILL: what amplitude and frequency range you expected, and how you excited the sensor to test it.]</p>
+        <p>
+          To verify it, I struck the sensor with a wrench and watched for the response on
+          an oscilloscope. Once the wiring was right, every strike produced a clear signal,
+          which confirmed the sensor was correctly referenced and reaching the ECU.
+        </p>
       </div>
 
       <div class="block wide fail">
-        <h4>What I found and fixed</h4>
+        <h4>Main harness repairs</h4>
         <p>
-          Several terminations on the car were failing in service, and most shared a
-          cause: no strain relief at the termination, so vibration and handling loads
-          went straight into the crimp and broke conductors at the pin.
+          Three connections on the main harness were failing in service, and they shared
+          a cause: no strain relief at the termination, so vibration and handling loads
+          went straight into the crimp instead of being absorbed by the harness.
         </p>
         <ul>
-          <li><strong>34-pin MoTeC connector</strong> &mdash; wires breaking off at the pins. Re-pinned with proper strain relief.</li>
-          <li><strong>20-pin dashboard connector</strong> &mdash; connector body damaged. Replaced the connector and re-pinned the circuits into it.</li>
-          <li><strong>Injector 1</strong> &mdash; same strain-relief failure mode, re-terminated.</li>
-          <li><strong>AEM ignitor</strong> &mdash; pinned to the wrong positions and unrelieved. Corrected the pinout and re-terminated.</li>
+          <li><strong>34-pin MoTeC connector.</strong> Wires breaking off at the pins. Re-pinned with proper strain relief.</li>
+          <li><strong>Injector.</strong> The wire broke at the termination. Re-terminated and relieved.</li>
+          <li><strong>AEM ignitor.</strong> Pinned to the wrong positions and unrelieved. Corrected the pinout and re-terminated.</li>
         </ul>
         <p>
-          The takeaway I carry forward: on a vehicle, connections fail at terminations,
-          and they fail mechanically before they fail electrically. Strain relief is not
-          a finishing touch.
+          That is the lesson I took from it. On a vehicle, connections fail at
+          terminations, and they fail mechanically before they fail electrically. Strain
+          relief is not a finishing touch.
         </p>
       </div>
 
-      <div class="block">
-        <h4>On the next harness</h4>
-        <p>[FILL: your own view, in your words. If the team has a plan for the next car and you contributed to it, say what part was yours. If it&rsquo;s the team&rsquo;s plan, say that &mdash; being clear about scope is worth more than claiming it.]</p>
+      <div class="block wide">
+        <h4>This year&rsquo;s car</h4>
+        <p>
+          I&rsquo;m taking on both the essential and non-essential harnesses for this
+          year&rsquo;s car, start to finish, built to motorsport practice:
+        </p>
+        <ul>
+          <li>Planning the harness and selecting connectors before any wire is cut</li>
+          <li>Mil-spec construction throughout</li>
+          <li>Concentric twisting for durability and noise rejection</li>
+          <li>Correct strain relief at every termination</li>
+          <li>Service loops so a repair doesn&rsquo;t consume the wire&rsquo;s slack</li>
+          <li>Heat shrink and full labeling so the harness can be diagnosed by someone who didn&rsquo;t build it</li>
+        </ul>
       </div>
 
       <div class="block">
@@ -788,19 +808,54 @@
       <span class="label" style="color:var(--c);font-weight:600">In progress</span>
     </div>
     <p class="oneline">
-      A TFT driver display running on an STM32H745I-DISCO, showing MoTeC ECU channels
-      over CAN, with the display logic generated from Simulink. Currently debugging the
-      integration between the generated code and the graphics stack.
+      A TFT driver display on an STM32H745I-DISCO, intended to show MoTeC ECU channels
+      over CAN with the display logic generated from Simulink. The graphics side works;
+      the Simulink integration doesn&rsquo;t yet.
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/dash.jpg" alt="Display running on the dev board"> -->
-    <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Photo &mdash; the board on the bench</span>
-        <span class="small">The working TouchGFX render on the panel is a legitimate shot even though integration isn&rsquo;t finished. Show what exists.</span>
+    <!-- ================= CAROUSEL ================= -->
+    <div class="carousel" data-carousel>
+      <div class="stage">
+
+        <!-- CAROUSEL SLIDES: add, remove, or reorder freely -->
+
+        <!-- Slide 1 -->
+        <div class="slide on" data-cap="TouchGFX rendering on the H745 panel. [FILL caption]">
+          <div class="ph">
+            <span class="big">Photo: TouchGFX render on the panel</span>
+            <span class="small">Replace with:  &lt;img src="img/dash-1.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Photo: the board on the bench</span>
+            <span class="small">Replace with:  &lt;img src="img/dash-2.jpg" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide" data-cap="[FILL caption]">
+          <div class="ph">
+            <span class="big">Screenshot: TouchGFX Designer</span>
+            <span class="small">Replace with:  &lt;img src="img/dash-3.png" alt="..."&gt;</span>
+          </div>
+        </div>
+
+        <!-- END CAROUSEL SLIDES -->
+
+        <button class="arrow prev" aria-label="Previous">&#8249;</button>
+        <button class="arrow next" aria-label="Next">&#8250;</button>
       </div>
-      <figcaption class="cap">TouchGFX rendering on the H745 panel. [FILL caption]</figcaption>
-    </figure>
+
+      <div class="carousel-bar">
+        <span class="counter"></span>
+        <span class="dots"></span>
+        <p class="slide-cap"></p>
+      </div>
+    </div>
+    <!-- =============== END CAROUSEL =============== -->
 
     <dl class="specs">
       <div class="spec"><dt>Board</dt><dd>STM32H745I-DISCO</dd></div>
@@ -808,7 +863,7 @@
       <div class="spec"><dt>Graphics</dt><dd>TouchGFX</dd></div>
       <div class="spec"><dt>Logic</dt><dd>Simulink /<br>Embedded Coder</dd></div>
       <div class="spec"><dt>Data source</dt><dd>MoTeC ECU over CAN</dd></div>
-      <div class="spec"><dt>Status</dt><dd>Integration debug</dd></div>
+      <div class="spec"><dt>Status</dt><dd>Integration<br>unresolved</dd></div>
     </dl>
 
     <div class="blocks">
@@ -817,47 +872,46 @@
         <p>
           Put live engine and vehicle channels in front of the driver on a TFT panel,
           with the display logic authored as a Simulink model and generated to C rather
-          than hand-written &mdash; so the team can change what&rsquo;s shown without
+          than hand-written, so the team can change what&rsquo;s shown without
           rewriting firmware.
         </p>
       </div>
 
       <div class="block">
-        <h4>Where it stands</h4>
+        <h4>What works so far</h4>
         <p>
-          TouchGFX alone works: the panel initializes and renders images correctly.
-          Bringing in the Simulink-generated code produces a blank screen &mdash; the
-          board runs, but nothing draws.
+          The graphics side is running. The panel initializes and renders images, and
+          I&rsquo;ve been working through TouchGFX to learn how the screens are laid out
+          and customized, which is what the finished dash will be built from.
         </p>
       </div>
 
       <div class="block wide fail">
-        <h4>What I&rsquo;m working through</h4>
+        <h4>The open problem</h4>
         <p>
-          Because TouchGFX renders correctly on its own, the TFT panel, framebuffer,
-          and LTDC configuration are all known good. That isolates the fault to the
-          integration itself, which narrows it to a few candidates worth checking in order:
+          Adding the Simulink-generated code produces a blank screen. The board runs, but
+          nothing draws. We haven&rsquo;t found the cause yet.
+        </p>
+        <p>
+          What&rsquo;s useful is that TouchGFX renders correctly on its own, which means
+          the panel, framebuffer, and display controller configuration are all known good.
+          The fault is somewhere in the integration, and these are the things worth
+          checking:
         </p>
         <ul>
-          <li>Generated initialization code re-configuring clocks or peripherals that TouchGFX already set up</li>
-          <li>The model&rsquo;s step function running in a context that blocks or starves the render task</li>
-          <li>Framebuffer memory overlapping a region the generated code claims</li>
-          <li>The generated code never reaching the draw calls at all &mdash; a fault or hang before first render</li>
+          <li>Whether the generated initialization code re-configures clocks or peripherals that TouchGFX already set up</li>
+          <li>Whether the model&rsquo;s step function is blocking or starving the render task</li>
+          <li>Whether the framebuffer overlaps memory the generated code claims</li>
+          <li>Whether execution reaches the draw calls at all, or faults before first render</li>
         </ul>
-        <p>[FILL: what you&rsquo;ve ruled out so far and how. Debugger? Toggling a GPIO to confirm the loop runs? This section is the whole value of showing an unfinished project &mdash; write down the actual method.]</p>
       </div>
 
       <div class="block">
-        <h4>Next</h4>
-        <p>[FILL: what you&rsquo;re trying next, in one or two sentences.]</p>
-      </div>
-
-      <div class="block">
-        <h4>Related</h4>
+        <h4>Why it&rsquo;s here</h4>
         <p>
-          Also working on two STM32G431 CAN nodes &mdash; one sending, one receiving &mdash;
-          programmed through Simulink and Embedded Coder, as a way into the CAN toolchain.
-          [FILL: status of this one.]
+          It&rsquo;s unfinished, but it&rsquo;s the work I&rsquo;m doing right now, and
+          the useful part of an unfinished project is the reasoning rather than the
+          result.
         </p>
       </div>
     </div>
@@ -869,85 +923,92 @@
   <div class="wrap">
     <div class="proj-head">
       <span class="tag">CH4</span>
-      <h3>AXI Quad SPI Bring-Up &amp; Verification</h3>
+      <h3>AXI Quad SPI</h3>
+      <span class="label" style="color:var(--c);font-weight:600">Coursework</span>
     </div>
     <p class="oneline">
-      Integrated Xilinx&rsquo;s AXI Quad SPI IP core on a Zybo Z7-10, drove it over
-      AXI4-Lite in internal loopback, and got a self-checking testbench passing in
-      behavioral simulation. <em>ECE 420 final project, Spring 2026.</em>
+      Final project for ECE 420. Each student picked one of Xilinx&rsquo;s pre-built
+      hardware blocks, learned the interface protocol used to control it directly from
+      the specification, and demonstrated it working in simulation. I chose the Quad SPI
+      core. <em>Spring 2026.</em>
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/axi-spi-sim.png" alt="Vivado behavioral simulation showing an AXI write transaction and a passing testbench"> -->
+    <!-- SWAP: replace the .ph div with <img src="img/axi-spi-sim.png" alt="Vivado behavioral simulation waveform"> -->
     <figure class="media" style="margin:0 0 34px">
       <div class="ph">
-        <span class="big">Screenshot &mdash; simulation waveform</span>
-        <span class="small">Use the cropped Vivado capture: AXI write transaction, state machine, and TEST PASSED in the console.</span>
+        <span class="big">Screenshot: simulation waveform</span>
+        <span class="small">Use the cropped Vivado capture.</span>
       </div>
-      <figcaption class="cap">Behavioral simulation &mdash; AXI write transaction, controller state machine, and the self-checking testbench reporting a pass.</figcaption>
+      <figcaption class="cap">Behavioral simulation: a write transaction on the bus, with the test reporting a pass.</figcaption>
     </figure>
 
     <dl class="specs">
       <div class="spec"><dt>Target</dt><dd>Zybo Z7-10<br>Zynq-7000</dd></div>
-      <div class="spec"><dt>Clock</dt><dd>125 MHz<br>via MMCM</dd></div>
-      <div class="spec"><dt>Interface</dt><dd>AXI4-Lite (A1&ndash;A3)</dd></div>
-      <div class="spec"><dt>DUT</dt><dd>Xilinx AXI Quad SPI IP</dd></div>
-      <div class="spec"><dt>Scope</dt><dd>Behavioral simulation<br>(no lab section)</dd></div>
+      <div class="spec"><dt>Interface</dt><dd>AXI4-Lite</dd></div>
+      <div class="spec"><dt>IP core</dt><dd>Xilinx AXI Quad SPI</dd></div>
+      <div class="spec"><dt>Tools</dt><dd>Vivado, VHDL</dd></div>
     </dl>
 
     <div class="blocks">
       <div class="block">
-        <h4>The problem</h4>
+        <h4>The assignment</h4>
         <p>
-          Read the AXI4-Lite specification cold &mdash; it wasn&rsquo;t covered in
-          lecture &mdash; and use it to drive a vendor IP core&rsquo;s register map:
-          configure the SPI control register, load the transmit FIFO, start a
-          transfer, and read the result back.
+          The professor listed a set of Xilinx IP cores, which are ready-made hardware
+          blocks that ship with Vivado, and each student claimed one. The catch was that
+          the control interface wasn&rsquo;t taught in lecture. You had to read the
+          specification yourself and work out how to drive the core from it, which is how
+          it works in industry. I picked the Quad SPI core after my first choice was taken.
         </p>
       </div>
 
       <div class="block">
-        <h4>Verification without external hardware</h4>
+        <h4>What SPI is</h4>
         <p>
-          The core runs in internal loopback: setting the LOOP bit in SPICR routes
-          MOSI back to MISO inside the IP, so no external SPI slave is needed. Transmit
-          <code>0xA5</code> and the expected value is definitionally the same byte
-          coming back &mdash; a golden value you can prove rather than measure.
-        </p>
-      </div>
-
-      <div class="block wide fail">
-        <h4>Two failures that took real debugging</h4>
-        <ul>
-          <li>
-            <strong>Elaboration error on the clock wizard.</strong> The generated MMCM
-            had active-low reset enabled, but the component declaration was missing the
-            <code>resetn</code> port. The tool error pointed at the instantiation; the
-            actual cause was in how the IP had been configured.
-          </li>
-          <li>
-            <strong>Simulation hung with the test never passing.</strong> The IP had been
-            generated with STARTUPE2 enabled, which internalizes the SPI clock and
-            replaces the <code>sck_i</code>/<code>sck_o</code>/<code>sck_t</code> ports
-            with <code>cfgclk</code>, <code>cfgmclk</code>, <code>eos</code>, and
-            <code>preq</code>. STARTUPE2 doesn&rsquo;t function in behavioral simulation
-            at all, so the transfer could never complete. Regenerating the IP with
-            STARTUPE2 disabled restored the standard SCK ports and the test passed.
-          </li>
-        </ul>
-        <p>
-          Both were configuration faults inside a vendor IP rather than logic errors,
-          and neither was visible from the error message alone.
+          SPI is how two chips on a circuit board talk to each other. One chip leads and
+          the other responds, over four wires: data out, data back, a shared clock so
+          both sides agree on timing, and a select line. It&rsquo;s used almost
+          everywhere, including sensors, memory chips, and displays.
         </p>
       </div>
 
       <div class="block">
-        <h4>My contribution</h4>
-        <p>[FILL: state plainly what you did here &mdash; IP configuration, Vivado project setup, running the simulation, diagnosing the two failures &mdash; and how the RTL came together. An interviewer will ask; the version you write yourself is the one you can defend.]</p>
+        <h4>What the IP core does</h4>
+        <p>
+          Rather than building an SPI controller from scratch, you drop in
+          Xilinx&rsquo;s. It&rsquo;s the hardware equivalent of using a library instead
+          of writing the function yourself.
+        </p>
+        <p>
+          The core has a set of internal settings and mailboxes, each at a numbered
+          address. AXI is the standard way the rest of the chip reads and writes those
+          addresses. Since every Xilinx core uses the same interface, learning it once
+          carries over to all of them.
+        </p>
       </div>
 
       <div class="block">
-        <h4>What I&rsquo;d change</h4>
-        <p>[FILL: e.g. taking it to hardware, adding directed tests beyond the single loopback case, or checking AXI response codes rather than just the data.]</p>
+        <h4>Testing it without hardware</h4>
+        <p>
+          The core has a loopback mode: a setting that wires its own output back to its
+          own input. Send a byte out and the same byte comes back. That means you know
+          the correct answer before running the test. Send <code>0xA5</code>, expect
+          <code>0xA5</code>. Anything else is a fault.
+        </p>
+        <p>
+          The test runs the design in software, feeds it inputs, checks the outputs, and
+          prints a pass or fail rather than making you read waveforms by eye. That&rsquo;s
+          the result shown above.
+        </p>
+      </div>
+
+      <div class="block wide">
+        <h4>Why it was worth doing</h4>
+        <p>
+          The point of the project was working from a protocol specification instead of a
+          tutorial. AXI is the interface nearly every Xilinx IP core uses, so being able
+          to read the spec and make sense of a register map applies to any of them, not
+          just this one.
+        </p>
       </div>
     </div>
   </div>
@@ -964,27 +1025,27 @@
 
         <div class="row">
           <span class="k">CSUN</span>
-          <span>B.S. Computer Engineering &mdash; expected May 2027</span>
+          <span>B.S. Computer Engineering, expected May 2027</span>
         </div>
         <div class="row">
           <span class="k">ECE 492</span>
-          <span>Senior Design I &mdash; Formula SAE Controls</span>
+          <span>Senior Design I, Formula SAE Controls</span>
         </div>
         <div class="row">
           <span class="k">ECE 425L</span>
-          <span>Microprocessor Systems &mdash; bare-metal ARM Cortex-M</span>
+          <span>Microprocessor Systems: bare-metal ARM Cortex-M</span>
         </div>
         <div class="row">
           <span class="k">ECE 420</span>
-          <span>Digital design &mdash; VHDL, AXI4-Lite, Vivado simulation and verification</span>
+          <span>Digital design: VHDL, AXI4-Lite, Vivado simulation and verification</span>
         </div>
         <div class="row">
           <span class="k">ECE 351</span>
-          <span>Signal processing &mdash; built a windowed-sinc FIR lowpass filter and DFT/IDFT in MATLAB from scratch, without toolbox functions</span>
+          <span>Signal processing: built a windowed-sinc FIR lowpass filter and DFT/IDFT in MATLAB from scratch, without toolbox functions</span>
         </div>
         <div class="row">
           <span class="k">ECE 340L</span>
-          <span>Electronics I &mdash; designed, simulated in PSpice, and bench-validated op-amp, diode, BJT, and MOSFET amplifier stages to gain and impedance specifications, ending in a cascaded common-gate / common-source multistage amplifier</span>
+          <span>Electronics I: designed, simulated in PSpice, and bench-validated op-amp, diode, BJT, and MOSFET amplifier stages to gain and impedance specifications, ending in a cascaded common-gate / common-source multistage amplifier</span>
         </div>
       </div>
 
@@ -995,7 +1056,7 @@
           Bare-metal C on ARM Cortex-M, CAN, I&sup2;C, SPI, ADC, timers, PWM, interrupt handling</p>
 
         <p><strong>Hardware</strong>
-          Connector pinning, de-pinning, and repair; crimp termination and strain relief; soldering; sensor wiring and integration; oscilloscope signal verification</p>
+          Crimp termination and connector pinning, strain relief, continuity checking, soldering, sensor wiring, oscilloscope signal verification</p>
 
         <p><strong>Vehicle systems</strong>
           MoTeC M130 logging and diagnostics; dyno and tuning sessions (shadowed); Formula SAE electrical rules</p>
@@ -1015,7 +1076,7 @@
 <footer>
   <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px">
     <span>Ethan Ranaei &middot; ethan.ranaei.562@my.csun.edu</span>
-    <span>Last updated [FILL month year]</span>
+    <span>Last updated August 2026</span>
   </div>
 </footer>
 
