@@ -5,10 +5,10 @@
   ============================================================
   TO ADD PHOTOS / VIDEO:
     - Upload files to an  img/  folder in the repo
-    - Find  CAROUSEL SLIDES  in the CH2 and CH3 sections
+    - Find  CAROUSEL SLIDES  in the CH1 and CH3 sections
     - Each slide is a <div class="slide">. Add or remove them freely.
       Photo slide:  <div class="slide" data-cap="..."><img src="img/x.jpg" alt="..."></div>
-      Video slide:  use the YouTube iframe pattern shown in CH2 slide 1
+      Video slide:  use the YouTube iframe pattern shown in CH1 slide 1
     - The arrows, dots, and counter adjust automatically
 
   TO MAKE THE PDF VERSION:
@@ -35,8 +35,8 @@
     --rule:#CDD1D6;
     --rule-soft:#E2E5E8;
 
-    --ch1:#C8890B;
-    --ch2:#12808E;
+    --ch1:#12808E;
+    --ch2:#C8890B;
     --ch3:#B93A50;
     --ch4:#43722F;
 
@@ -523,18 +523,18 @@
         <span class="label">Year</span>
       </div>
 
-      <a class="chan" href="#vault" style="--c:var(--ch1)">
+      <a class="chan" href="#harness" style="--c:var(--ch1)">
         <span class="chan-id">CH1</span>
-        <span class="chan-name">Access Control System</span>
-        <span class="chan-meta">TM4C123 &middot; Bare-metal C</span>
-        <span class="chan-year">2025</span>
-      </a>
-
-      <a class="chan" href="#harness" style="--c:var(--ch2)">
-        <span class="chan-id">CH2</span>
         <span class="chan-name">Harness Build &amp; Connector Repair</span>
         <span class="chan-meta">MoTeC M130 &middot; Formula SAE</span>
         <span class="chan-year">2026</span>
+      </a>
+
+      <a class="chan" href="#vault" style="--c:var(--ch2)">
+        <span class="chan-id">CH2</span>
+        <span class="chan-name">Access Control System</span>
+        <span class="chan-meta">TM4C123 &middot; Bare-metal C</span>
+        <span class="chan-year">2025</span>
       </a>
 
       <a class="chan" href="#dash" style="--c:var(--ch3)">
@@ -558,101 +558,10 @@
 <main>
 
 <!-- ============ CH1 ============ -->
-<section class="proj" id="vault" style="--c:var(--ch1)">
+<section class="proj" id="harness" style="--c:var(--ch1)">
   <div class="wrap">
     <div class="proj-head">
       <span class="tag">CH1</span>
-      <h3>Access Control System</h3>
-    </div>
-    <p class="oneline">
-      A passcode-controlled locking system on a TI TM4C123, written bare-metal in C
-      against the register headers, with no HAL and no RTOS. Six peripheral subsystems
-      brought up from scratch and made to work together. <em>ECE 425L.</em>
-    </p>
-
-    <!-- SWAP: replace the .ph div with the YouTube iframe for your 60s video -->
-    <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Video: the unlock sequence</span>
-        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here.</span>
-      </div>
-      <figcaption class="cap">Full sequence: proximity wake, code entry at 0:22, then stepper actuation. Enclosure is cardboard. The electronics and firmware are the project.</figcaption>
-    </figure>
-
-    <dl class="specs">
-      <div class="spec"><dt>MCU</dt><dd>TI TM4C123<br>ARM Cortex-M4</dd></div>
-      <div class="spec"><dt>Sensing</dt><dd>ADC0 / AIN2<br>photocell</dd></div>
-      <div class="spec"><dt>HMI</dt><dd>HD44780 LCD<br>4-bit nibble mode</dd></div>
-      <div class="spec"><dt>Actuator</dt><dd>28BYJ-48 stepper<br>via ULN2003</dd></div>
-      <div class="spec"><dt>Language</dt><dd>C, CMSIS registers</dd></div>
-    </dl>
-
-    <div class="blocks">
-      <div class="block">
-        <h4>Design decisions</h4>
-        <ul>
-          <li><strong>Hysteresis on the proximity wake.</strong> The photocell threshold uses separate assert and release points (1.2&nbsp;V and 0.7&nbsp;V) with a state latch, so the display doesn&rsquo;t chatter when ambient light sits near the boundary.</li>
-          <li><strong>Debounce with confirm-and-release.</strong> Edge detect, 20&nbsp;ms settle, re-read to confirm, then block until the button is released, rather than trusting a single sample.</li>
-          <li><strong>Timer-gated tone generation.</strong> Timer0 in periodic mode at 1&nbsp;&micro;s ticks sets buzzer frequency, instead of tuning loop counts by ear.</li>
-          <li><strong>Modular bring-up.</strong> Each peripheral has its own init and control functions so subsystems could be tested in isolation before integration.</li>
-        </ul>
-      </div>
-
-      <div class="block">
-        <h4>Actuation</h4>
-        <p>
-          The stepper runs an eight-state half-step table on <code>PB0&ndash;PB3</code>
-          through a ULN2003 driver, indexed forward for unlock and reversed for lock.
-          Coils are de-energized at the end of every move so the motor isn&rsquo;t
-          holding current, and heating, while idle.
-        </p>
-      </div>
-
-      <div class="block wide fail">
-        <h4>The failure that taught the most</h4>
-        <p>
-          The first build used a servo. Under load the system would freeze and reset,
-          but only when the servo moved. The servo, LCD, and buzzer were all
-          drawing from the microcontroller&rsquo;s supply, and the inrush when the servo
-          started was pulling the rail below the brown-out threshold.
-        </p>
-        <p>
-          The fix was architectural rather than incremental: move the actuator to a
-          28BYJ-48 stepper on its own external supply, taking the motor current off
-          the MCU rail entirely. The resets stopped. Correlating &ldquo;it only fails
-          when the motor moves&rdquo; to a power-integrity problem, instead of chasing
-          it as a firmware bug, was the real lesson.
-        </p>
-      </div>
-
-      <div class="block">
-        <h4>What I&rsquo;d change</h4>
-        <p>
-          The delay functions are busy-wait loops, which are fragile under compiler
-          optimization and blocking for the whole system. I&rsquo;d move timing to
-          SysTick and restructure the main loop as a non-blocking state machine, so
-          input stays responsive while the motor runs.
-        </p>
-      </div>
-
-      <div class="block">
-        <h4>Scope</h4>
-        <p>
-          This was a two-person course project. I did the hardware build and wrote all
-          of the firmware; my partner handled the class presentation.
-        </p>
-      </div>
-    </div>
-
-    <a class="repo" href="#">View source &rarr; [FILL repo link]</a>
-  </div>
-</section>
-
-<!-- ============ CH2 ============ -->
-<section class="proj" id="harness" style="--c:var(--ch2)">
-  <div class="wrap">
-    <div class="proj-head">
-      <span class="tag">CH2</span>
       <h3>Harness Build &amp; Connector Repair</h3>
     </div>
     <p class="oneline">
@@ -796,6 +705,97 @@
         </p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ CH2 ============ -->
+<section class="proj" id="vault" style="--c:var(--ch2)">
+  <div class="wrap">
+    <div class="proj-head">
+      <span class="tag">CH2</span>
+      <h3>Access Control System</h3>
+    </div>
+    <p class="oneline">
+      A passcode-controlled locking system on a TI TM4C123, written bare-metal in C
+      against the register headers, with no HAL and no RTOS. Six peripheral subsystems
+      brought up from scratch and made to work together. <em>ECE 425L.</em>
+    </p>
+
+    <!-- SWAP: replace the .ph div with the YouTube iframe for your 60s video -->
+    <figure class="media" style="margin:0 0 34px">
+      <div class="ph">
+        <span class="big">Video: the unlock sequence</span>
+        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here.</span>
+      </div>
+      <figcaption class="cap">Full sequence: proximity wake, code entry at 0:22, then stepper actuation. Enclosure is cardboard. The electronics and firmware are the project.</figcaption>
+    </figure>
+
+    <dl class="specs">
+      <div class="spec"><dt>MCU</dt><dd>TI TM4C123<br>ARM Cortex-M4</dd></div>
+      <div class="spec"><dt>Sensing</dt><dd>ADC0 / AIN2<br>photocell</dd></div>
+      <div class="spec"><dt>HMI</dt><dd>HD44780 LCD<br>4-bit nibble mode</dd></div>
+      <div class="spec"><dt>Actuator</dt><dd>28BYJ-48 stepper<br>via ULN2003</dd></div>
+      <div class="spec"><dt>Language</dt><dd>C, CMSIS registers</dd></div>
+    </dl>
+
+    <div class="blocks">
+      <div class="block">
+        <h4>Design decisions</h4>
+        <ul>
+          <li><strong>Hysteresis on the proximity wake.</strong> The photocell threshold uses separate assert and release points (1.2&nbsp;V and 0.7&nbsp;V) with a state latch, so the display doesn&rsquo;t chatter when ambient light sits near the boundary.</li>
+          <li><strong>Debounce with confirm-and-release.</strong> Edge detect, 20&nbsp;ms settle, re-read to confirm, then block until the button is released, rather than trusting a single sample.</li>
+          <li><strong>Timer-gated tone generation.</strong> Timer0 in periodic mode at 1&nbsp;&micro;s ticks sets buzzer frequency, instead of tuning loop counts by ear.</li>
+          <li><strong>Modular bring-up.</strong> Each peripheral has its own init and control functions so subsystems could be tested in isolation before integration.</li>
+        </ul>
+      </div>
+
+      <div class="block">
+        <h4>Actuation</h4>
+        <p>
+          The stepper runs an eight-state half-step table on <code>PB0&ndash;PB3</code>
+          through a ULN2003 driver, indexed forward for unlock and reversed for lock.
+          Coils are de-energized at the end of every move so the motor isn&rsquo;t
+          holding current, and heating, while idle.
+        </p>
+      </div>
+
+      <div class="block wide fail">
+        <h4>The failure that taught the most</h4>
+        <p>
+          The first build used a servo. Under load the system would freeze and reset,
+          but only when the servo moved. The servo, LCD, and buzzer were all
+          drawing from the microcontroller&rsquo;s supply, and the inrush when the servo
+          started was pulling the rail below the brown-out threshold.
+        </p>
+        <p>
+          The fix was architectural rather than incremental: move the actuator to a
+          28BYJ-48 stepper on its own external supply, taking the motor current off
+          the MCU rail entirely. The resets stopped. Correlating &ldquo;it only fails
+          when the motor moves&rdquo; to a power-integrity problem, instead of chasing
+          it as a firmware bug, was the real lesson.
+        </p>
+      </div>
+
+      <div class="block">
+        <h4>What I&rsquo;d change</h4>
+        <p>
+          The delay functions are busy-wait loops, which are fragile under compiler
+          optimization and blocking for the whole system. I&rsquo;d move timing to
+          SysTick and restructure the main loop as a non-blocking state machine, so
+          input stays responsive while the motor runs.
+        </p>
+      </div>
+
+      <div class="block">
+        <h4>Scope</h4>
+        <p>
+          This was a two-person course project. I did the hardware build and wrote all
+          of the firmware; my partner handled the class presentation.
+        </p>
+      </div>
+    </div>
+
+    <a class="repo" href="#">View source &rarr; [FILL repo link]</a>
   </div>
 </section>
 
