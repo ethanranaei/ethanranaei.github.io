@@ -3,18 +3,21 @@
   ============================================================
   ETHAN RANAEI - PORTFOLIO
   ============================================================
-  TO ADD PHOTOS / VIDEO:
-    - Upload files to an  img/  folder in the repo
-    - Find  CAROUSEL SLIDES  in the CH1 and CH3 sections
-    - Each slide is a <div class="slide">. Add or remove them freely.
-      Photo slide:  <div class="slide" data-cap="..."><img src="img/x.jpg" alt="..."></div>
-      Video slide:  use the YouTube iframe pattern shown in CH1 slide 1
-    - The arrows, dots, and counter adjust automatically
+  MEDIA:
+    Photos live in the  portfolio/  folder at the repo root:
+      portfolio/34_pin_motec_connector_being_fixed.jpg
+      portfolio/Pinning_wire_pic.jpg
+      portfolio/Dashboard_lit_up_with_picture.jpg
+      portfolio/Dashboard_turned_off.jpg
+      portfolio/axi-spi-sim.png
+
+    Videos are embedded from YouTube, so the MP4s do not need to be uploaded.
+
+  TO ADD MORE SLIDES: copy a <div class="slide"> block inside a carousel.
+  The arrows, dots, and counter adjust automatically.
 
   TO MAKE THE PDF VERSION:
-    - Open the live site, press Cmd/Ctrl+P, "Save as PDF"
-
-  SEARCH FOR  [FILL]  TO FIND EVERY SPOT THAT NEEDS YOUR REAL DETAILS.
+    Open the live site, press Cmd/Ctrl+P, "Save as PDF"
   ============================================================
 -->
 <html lang="en">
@@ -239,39 +242,30 @@
     margin-bottom:34px;
   }
   .media img{width:100%;display:block}
-  .ph{
-    aspect-ratio:16/9;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-    text-align:center;
-    padding:24px;
-    background:
-      repeating-linear-gradient(45deg,transparent,transparent 11px,rgba(0,0,0,.022) 11px,rgba(0,0,0,.022) 22px);
-  }
-  .ph .big{
-    font-family:var(--disp);
-    font-size:21px;
-    font-weight:600;
-    color:var(--muted);
-    text-transform:uppercase;
-    letter-spacing:.03em;
-  }
-  .ph .small{
-    font-family:var(--mono);
-    font-size:11.5px;
-    color:var(--muted);
-    max-width:46ch;
-    line-height:1.55;
-  }
   .cap{
     font-family:var(--mono);
     font-size:11.5px;
     color:var(--muted);
     padding:9px 13px;
     border-top:1px solid var(--rule-soft);
+  }
+
+  /* vertical (phone) video player */
+  .vert{
+    max-width:340px;
+    margin:0 auto;
+    padding:16px 0;
+  }
+  .vert-frame{
+    position:relative;
+    aspect-ratio:9/16;
+    background:#0e1114;
+  }
+  .vert-frame iframe{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    border:0;
   }
 
   /* ---------- carousel ---------- */
@@ -297,18 +291,26 @@
     width:100%;height:100%;
     object-fit:contain;
     display:block;
+    background:#0e1114;
   }
-  .slide iframe{
-    width:100%;height:100%;
-    border:0;display:block;
+  /* vertical video centred inside the 16:9 stage */
+  .slide.video-slide{
+    display:none;
+    align-items:center;
+    justify-content:center;
   }
-  .slide .ph{
+  .slide.video-slide.on{display:flex}
+  .slide.video-slide .holder{
     height:100%;
-    aspect-ratio:auto;
-    background:
-      repeating-linear-gradient(45deg,#15191d,#15191d 11px,#1b2025 11px,#1b2025 22px);
+    aspect-ratio:9/16;
+    position:relative;
   }
-  .slide .ph .big,.slide .ph .small{color:#8b949d}
+  .slide.video-slide iframe{
+    position:absolute;
+    inset:0;
+    width:100%;height:100%;
+    border:0;
+  }
 
   .arrow{
     position:absolute;
@@ -316,7 +318,7 @@
     transform:translateY(-50%);
     width:42px;height:42px;
     border:0;
-    background:rgba(255,255,255,.9);
+    background:rgba(255,255,255,.92);
     color:var(--ink);
     font-size:19px;
     line-height:1;
@@ -325,6 +327,7 @@
     align-items:center;
     justify-content:center;
     transition:background .15s ease;
+    z-index:4;
   }
   .arrow:hover{background:#fff}
   .arrow.prev{left:12px}
@@ -484,8 +487,7 @@
     .wrap{max-width:none;padding:0}
     .index,.repo,.arrow,.dots{display:none}
     .proj{page-break-before:always;border-top:0;margin-top:0;padding-top:0}
-    .ph{aspect-ratio:auto;height:150px}
-    .stage{aspect-ratio:auto;height:220px}
+    .stage{aspect-ratio:auto;height:240px}
     .slide{position:static;display:none}
     .slide.on{display:block}
     header.top{padding-top:0}
@@ -571,45 +573,25 @@
       the Controls subteam and taking on the full harness for this year&rsquo;s car.
     </p>
 
-    <!-- ================= CAROUSEL ================= -->
     <div class="carousel" data-carousel>
       <div class="stage">
 
-        <!-- CAROUSEL SLIDES: add, remove, or reorder freely -->
-
-        <!-- Slide 1: knock sensor scope video -->
-        <div class="slide on" data-cap="Knock sensor after re-pinning. Striking the sensor with a wrench produces a visible signal on the scope, confirming the wiring is correct.">
-          <div class="ph">
-            <span class="big">Video: knock sensor signal on the scope</span>
-            <span class="small">Replace this whole &lt;div class="ph"&gt; with:<br>&lt;iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen title="Knock sensor signal verification"&gt;&lt;/iframe&gt;</span>
+        <div class="slide video-slide on" data-cap="Knock sensor after re-pinning. Striking the sensor with a wrench produces a clear response on the scope, confirming the wiring and signal reference are correct.">
+          <div class="holder">
+            <iframe src="https://www.youtube.com/embed/tF_3u7OBqv4"
+                    title="Knock sensor signal verification on an oscilloscope"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
           </div>
         </div>
 
-        <!-- Slide 2 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Photo: connector work</span>
-            <span class="small">Replace with:  &lt;img src="img/harness-1.jpg" alt="..."&gt;</span>
-          </div>
+        <div class="slide" data-cap="Re-pinning the 34-pin MoTeC connector. Wires had broken off at the pins from a lack of strain relief; each circuit was re-terminated and checked.">
+          <img src="portfolio/34_pin_motec_connector_being_fixed.jpg" alt="Hand holding a 34-pin MoTeC connector partway through re-pinning, with individual wires seated in the connector body">
         </div>
 
-        <!-- Slide 3 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Photo: harness on the car</span>
-            <span class="small">Replace with:  &lt;img src="img/harness-2.jpg" alt="..."&gt;</span>
-          </div>
+        <div class="slide" data-cap="Harness work on the bench: Deutsch connectors, DR-25 heat shrink, crimped pins, and the extraction tools used to de-pin and re-pin circuits.">
+          <img src="portfolio/Pinning_wire_pic.jpg" alt="Bench setup showing a wiring harness with Deutsch connectors and DR-25 heat shrink, alongside crimped pins and pin extraction tools">
         </div>
-
-        <!-- Slide 4 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Photo: bench setup / tooling</span>
-            <span class="small">Replace with:  &lt;img src="img/harness-3.jpg" alt="..."&gt;</span>
-          </div>
-        </div>
-
-        <!-- END CAROUSEL SLIDES -->
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
         <button class="arrow next" aria-label="Next">&#8250;</button>
@@ -621,7 +603,6 @@
         <p class="slide-cap"></p>
       </div>
     </div>
-    <!-- =============== END CAROUSEL =============== -->
 
     <dl class="specs">
       <div class="spec"><dt>ECU</dt><dd>MoTeC M130</dd></div>
@@ -721,11 +702,14 @@
       brought up from scratch and made to work together. <em>ECE 425L.</em>
     </p>
 
-    <!-- SWAP: replace the .ph div with the YouTube iframe for your 60s video -->
     <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Video: the unlock sequence</span>
-        <span class="small">Upload to YouTube as Unlisted, then paste the iframe here.</span>
+      <div class="vert">
+        <div class="vert-frame">
+          <iframe src="https://www.youtube.com/embed/qYAS19qi310"
+                  title="Access control system unlock sequence"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowfullscreen></iframe>
+        </div>
       </div>
       <figcaption class="cap">Full sequence: proximity wake, code entry at 0:22, then stepper actuation. Enclosure is cardboard. The electronics and firmware are the project.</figcaption>
     </figure>
@@ -813,37 +797,16 @@
       the Simulink integration doesn&rsquo;t yet.
     </p>
 
-    <!-- ================= CAROUSEL ================= -->
     <div class="carousel" data-carousel>
       <div class="stage">
 
-        <!-- CAROUSEL SLIDES: add, remove, or reorder freely -->
-
-        <!-- Slide 1 -->
-        <div class="slide on" data-cap="TouchGFX rendering on the H745 panel. [FILL caption]">
-          <div class="ph">
-            <span class="big">Photo: TouchGFX render on the panel</span>
-            <span class="small">Replace with:  &lt;img src="img/dash-1.jpg" alt="..."&gt;</span>
-          </div>
+        <div class="slide on" data-cap="TouchGFX rendering a full-screen image on the H745 TFT panel. This confirms the display path works: panel init, framebuffer, and rendering are all good.">
+          <img src="portfolio/Dashboard_lit_up_with_picture.jpg" alt="STM32H745I-DISCO board held in hand, TFT panel rendering a full-screen image">
         </div>
 
-        <!-- Slide 2 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Photo: the board on the bench</span>
-            <span class="small">Replace with:  &lt;img src="img/dash-2.jpg" alt="..."&gt;</span>
-          </div>
+        <div class="slide" data-cap="The bench setup: the H745 DISCO board wired alongside a Nucleo board and a breadboard.">
+          <img src="portfolio/Dashboard_turned_off.jpg" alt="STM32H745I-DISCO board on a workbench with the display off, connected to a Nucleo board and breadboard with jumper wires">
         </div>
-
-        <!-- Slide 3 -->
-        <div class="slide" data-cap="[FILL caption]">
-          <div class="ph">
-            <span class="big">Screenshot: TouchGFX Designer</span>
-            <span class="small">Replace with:  &lt;img src="img/dash-3.png" alt="..."&gt;</span>
-          </div>
-        </div>
-
-        <!-- END CAROUSEL SLIDES -->
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
         <button class="arrow next" aria-label="Next">&#8250;</button>
@@ -855,7 +818,6 @@
         <p class="slide-cap"></p>
       </div>
     </div>
-    <!-- =============== END CAROUSEL =============== -->
 
     <dl class="specs">
       <div class="spec"><dt>Board</dt><dd>STM32H745I-DISCO</dd></div>
@@ -933,12 +895,8 @@
       core. <em>Spring 2026.</em>
     </p>
 
-    <!-- SWAP: replace the .ph div with <img src="img/axi-spi-sim.png" alt="Vivado behavioral simulation waveform"> -->
     <figure class="media" style="margin:0 0 34px">
-      <div class="ph">
-        <span class="big">Screenshot: simulation waveform</span>
-        <span class="small">Use the cropped Vivado capture.</span>
-      </div>
+      <img src="portfolio/axi-spi-sim.png" alt="Vivado behavioral simulation showing an AXI write transaction, the controller state machine, and a passing testbench">
       <figcaption class="cap">Behavioral simulation: a write transaction on the bus, with the test reporting a pass.</figcaption>
     </figure>
 
@@ -1102,6 +1060,13 @@ document.querySelectorAll('[data-carousel]').forEach(function(car){
   });
 
   function go(n){
+    // stop a playing YouTube embed when leaving its slide
+    var frame = slides[i].querySelector('iframe');
+    if(frame && n !== i){
+      var src = frame.getAttribute('src');
+      frame.setAttribute('src', src);
+    }
+
     i = (n + slides.length) % slides.length;
     slides.forEach(function(s, k){ s.classList.toggle('on', k === i); });
     dotsBox.querySelectorAll('.dot').forEach(function(d, k){ d.classList.toggle('on', k === i); });
