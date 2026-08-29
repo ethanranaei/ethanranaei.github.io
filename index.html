@@ -3,18 +3,18 @@
   ============================================================
   ETHAN RANAEI - PORTFOLIO
   ============================================================
-  MEDIA:
-    Photos live in the  portfolio/  folder at the repo root:
-      portfolio/34_pin_motec_connector_being_fixed.jpg
-      portfolio/Pinning_wire_pic.jpg
-      portfolio/Dashboard_lit_up_with_picture.jpg
-      portfolio/Dashboard_turned_off.jpg
-      portfolio/axi-spi-sim.png
+  IMAGE PATHS (note the capital P in Portfolio):
+    Portfolio/34_pin_motec_connector_being_fixed.jpg
+    Portfolio/Dashboard_lit_up_with_picture.jpg
+    Portfolio/Dashboard_turned_off.jpg
+    Portfolio/axi-spi-sim.png
+    Pinning%20wire%20pic.jpg          <- this one sits in the repo ROOT
 
-    Videos are embedded from YouTube, so the MP4s do not need to be uploaded.
+  If an image still doesn't show, paste its path onto your site URL
+  (e.g. https://ethanranaei.github.io/Portfolio/Dashboard_turned_off.jpg)
+  to check the exact filename. Paths are case-sensitive.
 
-  TO ADD MORE SLIDES: copy a <div class="slide"> block inside a carousel.
-  The arrows, dots, and counter adjust automatically.
+  Videos are embedded from YouTube, so the MP4s do not need uploading.
 
   TO MAKE THE PDF VERSION:
     Open the live site, press Cmd/Ctrl+P, "Save as PDF"
@@ -293,7 +293,6 @@
     display:block;
     background:#0e1114;
   }
-  /* vertical video centred inside the 16:9 stage */
   .slide.video-slide{
     display:none;
     align-items:center;
@@ -586,11 +585,11 @@
         </div>
 
         <div class="slide" data-cap="Re-pinning the 34-pin MoTeC connector. Wires had broken off at the pins from a lack of strain relief; each circuit was re-terminated and checked.">
-          <img src="portfolio/34_pin_motec_connector_being_fixed.jpg" alt="Hand holding a 34-pin MoTeC connector partway through re-pinning, with individual wires seated in the connector body">
+          <img src="Portfolio/34_pin_motec_connector_being_fixed.jpg" alt="Hand holding a 34-pin MoTeC connector partway through re-pinning, with individual wires seated in the connector body">
         </div>
 
         <div class="slide" data-cap="Harness work on the bench: Deutsch connectors, DR-25 heat shrink, crimped pins, and the extraction tools used to de-pin and re-pin circuits.">
-          <img src="portfolio/Pinning_wire_pic.jpg" alt="Bench setup showing a wiring harness with Deutsch connectors and DR-25 heat shrink, alongside crimped pins and pin extraction tools">
+          <img src="Pinning%20wire%20pic.jpg" alt="Bench setup showing a wiring harness with Deutsch connectors and DR-25 heat shrink, alongside crimped pins and pin extraction tools">
         </div>
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
@@ -801,11 +800,11 @@
       <div class="stage">
 
         <div class="slide on" data-cap="TouchGFX rendering a full-screen image on the H745 TFT panel. This confirms the display path works: panel init, framebuffer, and rendering are all good.">
-          <img src="portfolio/Dashboard_lit_up_with_picture.jpg" alt="STM32H745I-DISCO board held in hand, TFT panel rendering a full-screen image">
+          <img src="Portfolio/Dashboard_lit_up_with_picture.jpg" alt="STM32H745I-DISCO board held in hand, TFT panel rendering a full-screen image">
         </div>
 
         <div class="slide" data-cap="The bench setup: the H745 DISCO board wired alongside a Nucleo board and a breadboard.">
-          <img src="portfolio/Dashboard_turned_off.jpg" alt="STM32H745I-DISCO board on a workbench with the display off, connected to a Nucleo board and breadboard with jumper wires">
+          <img src="Portfolio/Dashboard_turned_off.jpg" alt="STM32H745I-DISCO board on a workbench with the display off, connected to a Nucleo board and breadboard with jumper wires">
         </div>
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
@@ -896,7 +895,7 @@
     </p>
 
     <figure class="media" style="margin:0 0 34px">
-      <img src="portfolio/axi-spi-sim.png" alt="Vivado behavioral simulation showing an AXI write transaction, the controller state machine, and a passing testbench">
+      <img src="Portfolio/axi-spi-sim.png" alt="Vivado behavioral simulation showing an AXI write transaction, the controller state machine, and a passing testbench">
       <figcaption class="cap">Behavioral simulation: a write transaction on the bus, with the test reporting a pass.</figcaption>
     </figure>
 
@@ -1060,7 +1059,6 @@ document.querySelectorAll('[data-carousel]').forEach(function(car){
   });
 
   function go(n){
-    // stop a playing YouTube embed when leaving its slide
     var frame = slides[i].querySelector('iframe');
     if(frame && n !== i){
       var src = frame.getAttribute('src');
