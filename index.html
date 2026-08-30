@@ -19,6 +19,9 @@
 
   Videos are embedded from YouTube, so no MP4 uploads needed.
 
+  CAROUSEL ORDER: whichever slide has class "on" shows first.
+  If you reorder slides, move "on" to the new first slide.
+
   TO MAKE THE PDF VERSION:
     Open the live site, press Cmd/Ctrl+P, "Save as PDF"
   ============================================================
@@ -578,25 +581,25 @@
     <div class="carousel" data-carousel>
       <div class="stage">
 
-        <div class="slide video-slide on" data-cap="Knock sensor after re-pinning. Striking the sensor with a wrench produces a clear response on the scope, confirming the wiring and signal reference are correct.">
-          <div class="holder">
-            <iframe src="https://www.youtube.com/embed/tF_3u7OBqv4"
-                    title="Knock sensor signal verification on an oscilloscope"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe>
-          </div>
-        </div>
-
-        <div class="slide" data-cap="The finished non-essential harness, out of the car. Raychem DR-25 heat shrink over the trunks, taped breakout points, and Deutsch connectors at the branch ends.">
-          <img src="Full%20Non-essential%20harness%20out%20fo%20the%20car.jpg" alt="Complete Formula SAE non-essential wiring harness laid out on a workshop floor, with DR-25 covered trunks branching to Deutsch connectors">
+        <div class="slide on" data-cap="Harness work on the bench: Deutsch connectors, DR-25 heat shrink, crimped pins, and the extraction tools used to de-pin and re-pin circuits.">
+          <img src="Pinning%20wire%20pic.jpg" alt="Bench setup showing a wiring harness with Deutsch connectors and DR-25 heat shrink, alongside crimped pins and pin extraction tools">
         </div>
 
         <div class="slide" data-cap="Re-pinning the 34-pin MoTeC connector. Wires had broken off at the pins from a lack of strain relief; each circuit was re-terminated and checked.">
           <img src="34%20pin%20motec%20connector%20being%20fixed.jpg" alt="Hand holding a 34-pin MoTeC connector partway through re-pinning, with individual wires seated in the connector body">
         </div>
 
-        <div class="slide" data-cap="Harness work on the bench: Deutsch connectors, DR-25 heat shrink, crimped pins, and the extraction tools used to de-pin and re-pin circuits.">
-          <img src="Pinning%20wire%20pic.jpg" alt="Bench setup showing a wiring harness with Deutsch connectors and DR-25 heat shrink, alongside crimped pins and pin extraction tools">
+        <div class="slide" data-cap="The finished non-essential harness, out of the car. Raychem DR-25 heat shrink over the trunks, taped breakout points, and Deutsch connectors at the branch ends.">
+          <img src="Full%20Non-essential%20harness%20out%20fo%20the%20car.jpg" alt="Complete Formula SAE non-essential wiring harness laid out on a workshop floor, with DR-25 covered trunks branching to Deutsch connectors">
+        </div>
+
+        <div class="slide video-slide" data-cap="Knock sensor after re-pinning. Striking the sensor with a wrench produces a clear response on the scope, confirming the wiring and signal reference are correct.">
+          <div class="holder">
+            <iframe src="https://www.youtube.com/embed/tF_3u7OBqv4"
+                    title="Knock sensor signal verification on an oscilloscope"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+          </div>
         </div>
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
@@ -806,12 +809,12 @@
     <div class="carousel" data-carousel>
       <div class="stage">
 
-        <div class="slide on" data-cap="TouchGFX rendering a full-screen image on the H745 TFT panel. This confirms the display path works: panel init, framebuffer, and rendering are all good.">
-          <img src="Dashboard%20lit%20up%20with%20picture.jpg" alt="STM32H745I-DISCO board held in hand, TFT panel rendering a full-screen image">
+        <div class="slide on" data-cap="The bench setup: the H745 DISCO board wired alongside a Nucleo board and a breadboard.">
+          <img src="Dashboard%20turned%20off.jpg" alt="STM32H745I-DISCO board on a workbench with the display off, connected to a Nucleo board and breadboard with jumper wires">
         </div>
 
-        <div class="slide" data-cap="The bench setup: the H745 DISCO board wired alongside a Nucleo board and a breadboard.">
-          <img src="Dashboard%20turned%20off.jpg" alt="STM32H745I-DISCO board on a workbench with the display off, connected to a Nucleo board and breadboard with jumper wires">
+        <div class="slide" data-cap="TouchGFX rendering a full-screen image on the H745 TFT panel. This confirms the display path works: panel init, framebuffer, and rendering are all good.">
+          <img src="Dashboard%20lit%20up%20with%20picture.jpg" alt="STM32H745I-DISCO board held in hand, TFT panel rendering a full-screen image">
         </div>
 
         <button class="arrow prev" aria-label="Previous">&#8249;</button>
